@@ -1,0 +1,2 @@
+# DEVote
+Decentralized voting app
