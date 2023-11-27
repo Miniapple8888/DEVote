@@ -1,4 +1,5 @@
 # DEVote
 Decentralized voting app
 
-Run `npm run dev` in the `frontend` folder to initialize the frontend
+To initialize the frontend, go to the `frontend` , run `npm run install` and `npm run dev` command
+To initialize the blockchain use the Remix IDE for Desktop and Metamask
