@@ -1,4 +1,4 @@
 # DEVote
 Decentralized voting app
 
-Run `npm start` in the `frontend` folder to initialize the frontend
+Run `npm run dev` in the `frontend` folder to initialize the frontend
