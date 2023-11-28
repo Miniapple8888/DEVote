@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Button = ({ onClick, children, className }) => {
+const Button = ({ onClick, children, className = "" }) => {
   const buttonClasses = `bg-blue-500 text-white font-bold py-2 px-4 rounded ${className}`;
 
   return (
