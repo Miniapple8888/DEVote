@@ -1,0 +1,80 @@
+{
+	"compiler": {
+		"version": "0.8.22+commit.4fc1097e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string[]",
+						"name": "candidates",
+						"type": "string[]"
+					}
+				],
+				"name": "createElection",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "hasElectionGoing",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"blockchain/contracts/DEVote.sol": "DEVote"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"blockchain/contracts/DEVote.sol": {
+			"keccak256": "0xd4e655eca7f340192fef3e45a3ad05187ebfb7e89750d61989b647d155db0b5d",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://91ac1f65ba300a73e843a3b8f1cbbfd39231f2205e0ff008414ea1c649abb05b",
+				"dweb:/ipfs/QmZ4hXg4Dqxkr1TWhdb8cPDTSHKBpWYWuzc4GXJimh1NbZ"
+			]
+		},
+		"blockchain/contracts/Election.sol": {
+			"keccak256": "0x2b6929d70758da029c682eba0f4f806e88acbfab51ff79b148d98114b8ea02c6",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://b8b3fbfe76f30c381d5bae2b16ff67c9f30a13d8176304f9d57c6b2fcae8a420",
+				"dweb:/ipfs/QmYFu2QwgnyzWdQbizjJcHofpQhNZ9dfwaa5J98Uzme9n6"
+			]
+		}
+	},
+	"version": 1
+}
