@@ -7,15 +7,15 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 
 const CreateElection = ({ provider }) => {
-    const [text, setText] = useState("");
+    const [text, setText] = useState('');
     const [candidates, setCandidates] = useState([]);
-    const [error, setError] = useState("");
+    const [error, setError] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const onSubmitCandidates = () => {
         if (candidates.length < 2) {
-            setError("ERROR: Too few candidates");
+            setError('ERROR: Too few candidates');
         } else if ((new Set(candidates)).size !== candidates.length) {
-            setError("ERROR: Candidates must be unique");
+            setError('ERROR: Candidates must be unique');
         } else {
             setIsModalOpen(true);
             setError('');
@@ -24,28 +24,29 @@ const CreateElection = ({ provider }) => {
     const addCandidate = (event) => {
         event.preventDefault();
         setCandidates(candidates => [...candidates, text]);
-        setText("");
+        setText('');
     }
-    const removeCandidate = (idx: number) => {
+    const removeCandidate = (idx) => {
         setCandidates(candidates.filter((c, i) => i !== idx));
     }
     const onSubmit = () => {
         // backend stuff, make a call with provider
-        console.log("Candidates submitted");
+        console.log('Candidates submitted');
         setIsModalOpen(false);
     }
+
     return (
         <div className='flex justify-center' >
             <div>
                 <form className='mb-8' onSubmit={addCandidate}>
                     <div className='flex items-stretch'>
-                        <TextField label="Enter Candidate..." variant="outlined" value={text} onChange={(e) => setText(e.target.value)} onSubmit={addCandidate} />
-                        <Button sx={{ marginLeft: "10px" }} type="submit" variant="contained" onClick={addCandidate}>Add</Button>
+                        <TextField label='Enter Candidate...' variant='outlined' value={text} onChange={(e) => setText(e.target.value)} onSubmit={addCandidate} />
+                        <Button sx={{ marginLeft: '10px' }} type='submit' variant='contained' onClick={addCandidate}>Add</Button>
                     </div>
                 </form >
                 {
                     candidates.map((candidate, i) =>
-                        <Button sx={{ marginRight: '4px' }} variant='outlined' onClick={() => removeCandidate(i)}>{candidate}</Button>
+                        <Button sx={{ marginRight: '4px', ':hover': { textDecoration: 'line-through', 'text-decoration-thickness': '2px' } }} variant='outlined' onClick={() => removeCandidate(i)}>{candidate}</Button>
                     )
                 }
                 {candidates.length > 0 && <p>Click candidate name to remove</p>}
