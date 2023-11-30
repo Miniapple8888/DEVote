@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from './common/Button';
 import { useNavigate } from 'react-router-dom';
 
-const Dashboard = ({ account }) => {
+const Dashboard = () => {
+    const [account, setAccount] = useState('');
     const navigate = useNavigate();
     const createElection = () => {
         navigate("/createElection");
@@ -15,6 +16,12 @@ const Dashboard = ({ account }) => {
     const castVote = () => {
         navigate("/castVote");
     }
+    useEffect(() => {
+        async function getAccount() {
+            setAccount((await window.ethereum.request({ method: 'eth_accounts' }))[0]);
+        }
+        getAccount()
+    }, []);
     return (
         <div>
             <p>Logged in as: {account}</p>
