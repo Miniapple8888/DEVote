@@ -27,7 +27,7 @@ const CastVote = () => {
         <Header>1. Cast your vote</Header>
         {electionAddress == "" ?
          <FindElection handleSearchForm={handleSearchForm} validateSearchQuery={validateSearchQuery} /> :
-         <VoteForm electionId={electionAddress} candidates={randData} date="12/03/2024" handleCastedVote={handleCastedVote} />
+         <VoteForm electionAddr={electionAddress} candidates={randData} date="12/03/2024" handleCastedVote={handleCastedVote} />
         }
     </div>
     )

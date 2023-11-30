@@ -1,4 +1,4 @@
-import './App.css'
+import './App.css';
 import Dashboard from './components/Dashboard';
 import { useState } from 'react';
 import ConnectWallet from './components/ConnectWallet';
