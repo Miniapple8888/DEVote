@@ -25,9 +25,9 @@ const Dashboard = () => {
     return (
         <div>
             <p>Logged in as: {account}</p>
-            <Button onClick={createElection}>Create Election</Button>
-            <Button onClick={viewResults}>View Election Results</Button>
-            <Button onClick={castVote}>Cast votes</Button>
+            <Button className='m-4' onClick={createElection}>Create Election</Button>
+            <Button className='m-4' onClick={viewResults}>View Election Results</Button>
+            <Button className='m-4' onClick={castVote}>Cast votes</Button>
         </div>
     )
 }
