@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import CreateElection from './components/CreateElection'
 import CastVote from './components/CastVote'
 import ViewResults from './components/ViewResults'
+import Brand from './components/common/Brand';
 
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
   // make transactions and stuff using provider.request()
   return (
     <>
+      <Brand />
       <Routes>
         <Route path="/" element={<ConnectWallet setProvider={setProvider} setAccount={setAccount} />} />
         <Route path="/dashboard" element={<Dashboard account={account} />} />
