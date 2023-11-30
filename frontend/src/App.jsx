@@ -18,7 +18,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<ConnectWallet setProvider={setProvider} setAccount={setAccount} />} />
         <Route path="/dashboard" element={<Dashboard account={account} />} />
-        <Route path="/createElection" element={<CreateElection />} />
+        <Route path="/createElection" element={<CreateElection provider={provider} />} />
         <Route path="/castVote" element={<CastVote />} />
         <Route path="/viewResults" element={<ViewResults />} />
       </Routes>
