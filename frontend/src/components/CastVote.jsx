@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-import Header from './common/Header';
-import FindElection from './FindElection';
-import VoteForm from './VoteForm';
+import FlashMsg from './common/FlashMsg'
+import Header from './common/Header'
+import FindElection from './FindElection'
+import VoteForm from './VoteForm'
 
 const CastVote = () => {
     const [electionAddress, setElectionAddress] = useState('')
+    const [alertMsg, setAlertMsg] = useState('')
+    const [alertSeverity, setAlertSeverity] = useState('')
     const randData = ["John Doe", "Jane Doe"];
 
     const handleSearchForm = ((searchQuery) => {
@@ -20,11 +23,14 @@ const CastVote = () => {
     const handleCastedVote = (vote) => {
         // do something with the vote (change smart contract)
         // ensure election Address exists
+        setAlertMsg("Successfully casted vote")
+        setAlertSeverity("success")
     }
 
     return (
     <div>
-        <Header>1. Cast your vote</Header>
+        {alertMsg && <FlashMsg message={alertMsg} severity={alertSeverity} duration={3000} />}
+        <Header>1. Cast vote</Header>
         {electionAddress == "" ?
          <FindElection handleSearchForm={handleSearchForm} validateSearchQuery={validateSearchQuery} /> :
          <VoteForm electionAddr={electionAddress} candidates={randData} date="12/03/2024" handleCastedVote={handleCastedVote} />

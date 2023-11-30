@@ -4,14 +4,14 @@ import { useState } from 'react';
 import ConnectWallet from './components/ConnectWallet';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import CreateElection from './components/CreateElection';
-import CastVote from './components/CastVote';
-import ViewResults from './components/ViewResults';
+import CreateElection from './components/CreateElection'
+import CastVote from './components/CastVote'
+import ViewResults from './components/ViewResults'
 
 
 const App = () => {
-  const [provider, setProvider] = useState();
-  const [account, setAccount] = useState();
+  const [provider, setProvider] = useState()
+  const [account, setAccount] = useState()
   // make transactions and stuff using provider.request()
   return (
     <>
