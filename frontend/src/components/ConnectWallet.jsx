@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSDK } from '@metamask/sdk-react';
 import Button from "./common/Button";
 import { useNavigate } from 'react-router-dom';
