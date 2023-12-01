@@ -44,10 +44,9 @@ contract DEVote {
      * @param candidates Array of the proposed candidates for the election
      * @returns uint ID of created election
      */
-    function createElection(string[] memory candidates)
-        public
-        returns (uint256)
-    {
+    function createElection(
+        string[] memory candidates
+    ) public returns (uint256) {
         elections.push(new Election(msg.sender, candidates));
         uint256 id = elections.length - 1;
         ongoingElections[msg.sender] = id;
@@ -110,9 +109,15 @@ contract DEVote {
 
     /*
      * This method ends the election of a user
-     * @return bool True if election ended, False if election was already ended
+     * @return bool True if this function call ended the election, False otherwise
      */
     function endElection() public returns (bool) {
+        if (
+            elections.length == 0 ||
+            elections[ongoingElections[msg.sender]].getOwner() != msg.sender
+        ) {
+            return false;
+        }
         bool retVal = !elections[ongoingElections[msg.sender]]
             .getElectionStatus();
         elections[ongoingElections[msg.sender]].endElection();
@@ -125,12 +130,9 @@ contract DEVote {
      * @return uint256 timestamp
      * @return string[] Array with the name of the candidates
      */
-    function getElection(uint256 id)
-        public
-        view
-        electionIsValid(id)
-        returns (uint256, string[] memory)
-    {
+    function getElection(
+        uint256 id
+    ) public view electionIsValid(id) returns (uint256, string[] memory) {
         Election election = elections[id];
         return (election.getTimestamp(), election.getCandidates());
     }
@@ -140,10 +142,10 @@ contract DEVote {
      * election associated to id exists and is ongoing. Otherwise, throw error.
      * Also throws an error if casting of the vote fails (invalid vote).
      */
-    function castVoteOnElection(uint256 id, string memory _vote)
-        public
-        electionIsValid(id)
-    {
+    function castVoteOnElection(
+        uint256 id,
+        string memory _vote
+    ) public electionIsValid(id) {
         Election election = elections[id];
         election.castVote(msg.sender, _vote);
         if (addressElections[msg.sender].length <= 0) {
@@ -160,7 +162,9 @@ contract DEVote {
      * @return string[] Array with the name of the candidates
      * @return numVotes[] Array with the number of votes for each candidate
      */
-    function getElectionResults(uint256 id)
+    function getElectionResults(
+        uint256 id
+    )
         public
         view
         electionEnded(id)
