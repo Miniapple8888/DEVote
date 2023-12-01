@@ -1,6 +1,6 @@
 import React from "react";
 import { useSDK } from '@metamask/sdk-react';
-import Button from "./common/Button";
+import Button from "../../components/Button";
 import { useNavigate } from 'react-router-dom';
 
 export default function ConnectWallet({ setProvider, setAccount }) {

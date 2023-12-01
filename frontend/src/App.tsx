@@ -1,13 +1,13 @@
 import './App.css';
-import Dashboard from './components/Dashboard';
+import Dashboard from './pages/Dashboard';
 import { useState } from 'react';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import CreateElection from './components/CreateElection';
-import CastVote from './components/CastVote';
-import ViewResults from './components/ViewResults';
+import CreateElection from './pages/CreateElection';
+import CastVote from './pages/CastVote';
+import ViewResults from './pages/ViewResults';
 import RequireAuth from './RequireAuth';
-import ConnectWallet from './components/ConnectWallet';
+import ConnectWallet from './pages/ConnectWallet';
 
 const App = () => {
   const [provider, setProvider] = useState();

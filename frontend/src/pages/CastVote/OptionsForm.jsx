@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from './common/Button';
+import Button from '../../components/Button';
 /* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
 
 const OptionsForm = ({ options, handleSubmitForm }) => {
