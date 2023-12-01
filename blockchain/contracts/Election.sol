@@ -13,6 +13,8 @@ contract Election {
     address[] voters;
     mapping(string => uint256) candidateVotes;
     mapping(address => string) addressVotes;
+    mapping(string => bool) candidateExist;
+    mapping(address => bool) voterExist;
     bool hasEnded;
 
     /*
@@ -28,6 +30,7 @@ contract Election {
 
         for (uint256 i = 0; i < candidates.length; i++) {
             candidateVotes[candidates[i]] = 0;
+            candidateExist[candidates[i]] = true;
         }
     }
 
@@ -47,6 +50,15 @@ contract Election {
 
     function getCandidates() public view returns (string[] memory) {
         return candidates;
+    }
+
+    /*
+    * This method returns the deadline timestamp of the election
+    * @return uint256 deadline timestamp
+    */
+
+    function getTimestamp() public view returns(uint256) {
+        return timestamp;
     }
 
     /*
@@ -81,5 +93,26 @@ contract Election {
      */
     function endElection() public {
         hasEnded = true;
+    }
+
+
+    /*
+    * This method updates candidateVotes + addressVotes mappings + voters array to cast a vote
+    * requires: _voter to be a valid user address (EOA)
+    */
+
+    function castVote(address _voter, string memory _candidate) public {  
+        // require _candidate is valid
+        require(candidateExist[_candidate], "candidate doesn't exist");
+        // Check if voter exists already in voters
+        if (voterExist[_voter]) {
+            string memory prevVote = addressVotes[_voter];
+            candidateVotes[prevVote]--;
+        } else {
+            voters.push(_voter);
+            voterExist[_voter] = true;
+        }
+        candidateVotes[_candidate]++;
+        addressVotes[_voter] = _candidate;
     }
 }
