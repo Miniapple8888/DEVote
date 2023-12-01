@@ -8,6 +8,7 @@ const CreateEndElection = () => {
     const [loading, setLoading] = useState(true);
     const [hasOngoing, setHasOngoing] = useState(false);
     const onEndElection = async () => {
+        setLoading(true);
         const result = await endElection();
         if (result) {
             console.log("Election ended");
@@ -15,6 +16,7 @@ const CreateEndElection = () => {
             console.log("Election was already ended")
         }
         setHasOngoing(false);
+        setLoading(false);
     }
     useEffect(() => {
         async function checkOngoingElection() {
