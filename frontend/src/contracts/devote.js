@@ -23,7 +23,7 @@ export const startElection = async (candidates) => {
  * This method connects to the smart contract to start a new election
  * @returns bool True if user has an ongoing election, false otherwise
  */
-export const hasElectionGoing = async () => {
+export const hasOngoingElection = async () => {
   const accounts = await web3.eth.getAccounts();
   return await smartContract.methods.hasElectionGoing().call({
     from: accounts[0],

@@ -91,7 +91,6 @@ contract Election {
         hasEnded = true;
     }
 
-
     /*
     * This method updates candidateVotes + addressVotes mappings + voters array to cast a vote
     * requires: _voter to be a valid user address (EOA)

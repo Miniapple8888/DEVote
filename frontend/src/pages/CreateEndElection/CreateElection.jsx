@@ -6,12 +6,16 @@ import DialogActions from "@mui/material/DialogActions";
 import TextField from "@mui/material/TextField";
 import { Button, DialogContent } from "@mui/material";
 import { startElection } from "../../contracts/devote";
+import { useNavigate } from "react-router-dom";
+import LoadingScreen from "../../components/LoadingScreen";
 
 const CreateElection = () => {
   const [text, setText] = useState("");
   const [candidates, setCandidates] = useState([]);
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const onSubmitCandidates = () => {
     if (candidates.length < 2) {
       setError("ERROR: Too few candidates");
@@ -33,9 +37,13 @@ const CreateElection = () => {
 
   const onSubmit = async () => {
     try {
+      setLoading(true);
+      setIsModalOpen(false);
       await startElection(candidates);
       console.log("Candidates submitted");
-      setIsModalOpen(false);
+      // TODO: show flash message
+      navigate("/dashboard");
+      setLoading(false);
     } catch (err) {
       console.log(err)
     }
@@ -43,6 +51,7 @@ const CreateElection = () => {
 
   return (
     <div className="flex justify-center">
+      <LoadingScreen loading={loading} />
       <div>
         <form className="mb-8" onSubmit={addCandidate}>
           <div className="flex items-stretch">
@@ -82,7 +91,7 @@ const CreateElection = () => {
         {candidates.length > 0 && <p>Click candidate name to remove</p>}
         {error && <p className="text-red-600">{error}</p>}
         <Button
-          sx={{ display: "block", "margin-top": "24px" }}
+          sx={{ display: "block", marginTop: "24px" }}
           variant="contained"
           onClick={onSubmitCandidates}
         >

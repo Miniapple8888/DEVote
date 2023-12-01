@@ -59,15 +59,15 @@ contract DEVote {
      * @return boolean True if it still on going and false if not
      */
     function hasElectionGoing() public view returns (bool) {
-        address owner = elections[ongoingElections[msg.sender]].getOwner();
+        Election target = elections[ongoingElections[msg.sender]];
+        address owner = target.getOwner();
 
         if (owner != msg.sender) {
-            return true;
+            return false;
         }
 
-        bool status = elections[ongoingElections[msg.sender]]
-            .getElectionStatus();
-        return !status;
+        bool hasEnded = target.getElectionStatus();
+        return !hasEnded;
     }
 
     /*
@@ -110,9 +110,9 @@ contract DEVote {
      * @return bool True if election ended, False if election was already ended
      */
     function endElection() public returns (bool) {
-        Election target = elections[ongoingElections[msg.sender]];
-        bool retVal = !target.getElectionStatus();
-        target.endElection();
+        bool retVal = !elections[ongoingElections[msg.sender]]
+            .getElectionStatus();
+        elections[ongoingElections[msg.sender]].endElection();
         return retVal;
     }
 
