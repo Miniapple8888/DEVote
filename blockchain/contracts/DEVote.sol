@@ -7,8 +7,8 @@ import "./Election.sol";
 contract DEVote {
     mapping(address => Election) elections;
 
-    // For viewing the elections that user has participated
-    // mapping(address => address[]) addressElections;
+    // For viewing the elections that a user has participated in
+    mapping(address => address[]) addressElections;
 
     /*
      * This method initializes and creates a new election with the Election smart contract
@@ -46,5 +46,25 @@ contract DEVote {
         returns (string[] memory, uint256[] memory)
     {
         return (elections[msg.sender].getVoteCount());
+    }
+
+    /*
+     * This method gets all the elections that a user has participated in
+     * @return address[] Array with all participated elections
+     * @return bool[] Array with status of all participated elections
+     */
+    function getElectionsForUser()
+        public
+        view
+        returns (address[] memory, bool[] memory)
+    {
+        address[] memory addresses = addressElections[msg.sender];
+        bool[] memory statuses = new bool[](
+            addressElections[msg.sender].length
+        );
+        for (uint i = 0; i < addresses.length; i++) {
+            statuses[i] = elections[addresses[i]].getElectionStatus();
+        }
+        return (addresses, statuses);
     }
 }
