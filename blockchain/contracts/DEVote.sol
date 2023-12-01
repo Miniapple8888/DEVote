@@ -5,7 +5,7 @@ pragma solidity >=0.8.2 <0.9.0;
 import "./Election.sol";
 
 contract DEVote {
-    Election[] elections;
+    Election[] elections = new Election[](0);
     // For viewing the currently ongoing election of a user
     mapping(address => uint256) ongoingElections;
 
@@ -59,6 +59,9 @@ contract DEVote {
      * @return boolean True if it still on going and false if not
      */
     function hasElectionGoing() public view returns (bool) {
+        if (elections.length == 0) {
+            return false;
+        }
         Election target = elections[ongoingElections[msg.sender]];
         address owner = target.getOwner();
 
