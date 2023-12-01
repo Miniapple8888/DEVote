@@ -67,4 +67,15 @@ contract DEVote {
         }
         return (addresses, statuses);
     }
+
+    /*
+     * This method ends the election of a user
+     * @return bool True if election ended, False if election was already ended
+     */
+    function endElection() public returns (bool) {
+        Election target = elections[msg.sender];
+        bool retVal = !target.getElectionStatus();
+        target.endElection();
+        return retVal;
+    }
 }

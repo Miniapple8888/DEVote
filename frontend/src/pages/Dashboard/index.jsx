@@ -6,7 +6,7 @@ const Dashboard = () => {
     const [account, setAccount] = useState('');
     const navigate = useNavigate();
     const createElection = () => {
-        navigate("/createElection");
+        navigate("/createEndElection");
     }
 
     const viewResults = () => {
@@ -25,7 +25,7 @@ const Dashboard = () => {
     return (
         <div>
             <p>Logged in as: {account}</p>
-            <Button className='m-4' onClick={createElection}>Create Election</Button>
+            <Button className='m-4' onClick={createElection}>Create/End Election</Button>
             <Button className='m-4' onClick={viewResults}>View Election Results</Button>
             <Button className='m-4' onClick={castVote}>Cast votes</Button>
         </div>
