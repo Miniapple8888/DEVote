@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import IconButton from "./IconButton";
+import TableHeader from "./TableHeader";
 
 const ViewParticipatedElections = () => {
   const testExamples = [
@@ -25,7 +26,7 @@ const ViewParticipatedElections = () => {
     },
     {
       electionID: "6",
-      
+
       hasEnded: false,
     },
     {
@@ -60,15 +61,9 @@ const ViewParticipatedElections = () => {
         <table className="w-full h-full">
           <thead className="sticky top-0">
             <tr>
-              <th className="bg-blue-500 text-white font-medium py-2">
-                ID of elections
-              </th>
-              <th className="bg-blue-500 text-white font-medium py-2 border-x-2 border-white">
-                Status
-              </th>
-              <th className="bg-blue-500 text-white font-medium py-2">
-                Actions
-              </th>
+              <TableHeader header={"ID of election"} />
+              <TableHeader header={"Status"} />
+              <TableHeader header={"ACtions"} />
             </tr>
           </thead>
           <tbody>
