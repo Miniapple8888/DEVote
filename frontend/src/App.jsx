@@ -3,7 +3,7 @@ import Dashboard from "./pages/Dashboard";
 import { useState } from "react";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import CreateElection from "./pages/CreateElection";
+import CreateEndElection from "./pages/CreateEndElection";
 import CastVote from "./pages/CastVote";
 import ViewResults from "./pages/ViewResults";
 import RequireAuth from "./RequireAuth";
@@ -34,10 +34,10 @@ const App = () => {
           }
         />
         <Route
-          path="/createElection"
+          path="/createEndElection"
           element={
             <RequireAuth>
-              <CreateElection />
+              <CreateEndElection />
             </RequireAuth>
           }
         />

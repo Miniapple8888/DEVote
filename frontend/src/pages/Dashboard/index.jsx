@@ -3,11 +3,11 @@ import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const [account, setAccount] = useState("");
+  const [account, setAccount] = useState('');
   const navigate = useNavigate();
   const createElection = () => {
-    navigate("/createElection");
-  };
+      navigate("/createEndElection");
+  }
 
   const viewResults = () => {
     navigate("/viewResults");
@@ -28,11 +28,12 @@ const Dashboard = () => {
     }
     getAccount();
   }, []);
+  
   return (
     <div className="flex flex-col gap-3 justify-center items-center">
       <p>Logged in as: {account}</p>
       <div className="flex justify-center items-center gap-5">
-        <Button onClick={createElection}>Create Election</Button>
+        <Button onClick={createElection}>Create/End Election</Button>
         <Button onClick={castVote}>Cast votes</Button>
         <Button onClick={viewParticipatedElections}>
           View Participated Elections
@@ -42,5 +43,6 @@ const Dashboard = () => {
     </div>
   );
 };
+
 
 export default Dashboard;
