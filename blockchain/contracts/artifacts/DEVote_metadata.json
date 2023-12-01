@@ -14,7 +14,13 @@
 					}
 				],
 				"name": "createElection",
-				"outputs": [],
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -54,9 +60,9 @@
 				"name": "getElectionsForUser",
 				"outputs": [
 					{
-						"internalType": "address[]",
+						"internalType": "uint256[]",
 						"name": "",
-						"type": "address[]"
+						"type": "uint256[]"
 					},
 					{
 						"internalType": "bool[]",
@@ -110,6 +116,7 @@
 	"sources": {
 		"Users/jamesfan/Documents/Coding/DEVote/blockchain/contracts/DEVote.sol": {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"keccak256": "0x56864218f710fcb3821a6dfdf8d8cb9ffe87a382f16f933a0a9c55c731f26bb4",
 			"license": "GPL-3.0",
 			"urls": [
@@ -122,6 +129,13 @@
 				"bzz-raw://24bd796864d0a3864eda353e6b3bdc40efd89daa2e1a50584ea06de79393cd06",
 				"dweb:/ipfs/QmZUEmaUEEf5ZV98pAyTAyTJ5sXsxKW5kcBTgpZjMyVcWk"
 >>>>>>> dc4f869 (end election)
+=======
+			"keccak256": "0x87722347d0a4208ccd06566b13711ce64e5845bf70995fb177d96661aaa2b237",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://ed19c3fbeb1505db7d64443c8dfc9171e20906ae5035d3ff2993b14408273beb",
+				"dweb:/ipfs/QmfRnYPDVwLeSyrE8RQSsF1GqDWKmkU6V21Lh9xu77uwA3"
+>>>>>>> 887bca3 (remix metadata)
 			]
 		},
 		"Users/jamesfan/Documents/Coding/DEVote/blockchain/contracts/Election.sol": {
