@@ -3,11 +3,11 @@ import React from 'react';
 
 const ElectionView = ({ election }) => {
     const { timestamp, candidates, candidateVotes, hasEnded } = election;
-    const winner = Object.keys(candidateVotes).reduce((a, b) => candidateVotes[a] > candidateVotes[b] ? a : b);
+    const winner = Object.keys(candidateVotes).reduce((a, b) => candidateVotes[a] >= candidateVotes[b] ? a : b);
     return (
         <div className='m-4'>
-            <h1>Results for {hasEnded ? "completed" : "ongoing"} election started at {new Date(timestamp * 1000).toISOString().slice(0, -5)}:</h1>
-            {hasEnded && <h3>The winner of the election is: {winner}</h3>}
+            <h1 className='text-2xl' >Results for {hasEnded ? "completed" : "ongoing"} election started at {new Date(timestamp * 1000).toISOString().slice(0, -5)}:</h1>
+            {hasEnded && <h3 className='text-xl' >The winner of the election is: <b>{winner}</b></h3>}
             <TableContainer>
                 <Table>
                     <TableHead>
