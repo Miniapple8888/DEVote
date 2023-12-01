@@ -27,7 +27,7 @@ const ViewParticipatedElections = () => {
             <tr>
               <TableHeader header={"ID of election"} />
               <TableHeader header={"Status"} />
-              <TableHeader header={"ACtions"} />
+              <TableHeader header={"Actions"} />
             </tr>
           </thead>
           <tbody>
