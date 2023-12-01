@@ -25,7 +25,7 @@ const App = () => {
       } />
       <Route path="/createElection" element={
         <RequireAuth>
-          <CreateElection provider={provider} />
+          <CreateElection />
         </RequireAuth>} />
       <Route path="/castVote" element={
         <RequireAuth>
