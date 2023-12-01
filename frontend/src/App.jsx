@@ -9,6 +9,7 @@ import ViewResults from "./pages/ViewResults";
 import RequireAuth from "./RequireAuth";
 import ConnectWallet from "./pages/ConnectWallet";
 import Brand from "./components/Brand";
+import ViewParticipatedElections from "./pages/ViewParticipatedElections";
 
 const App = () => {
   const [provider, setProvider] = useState();
@@ -53,6 +54,14 @@ const App = () => {
           element={
             <RequireAuth>
               <ViewResults />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/participatedElections"
+          element={
+            <RequireAuth>
+              <ViewParticipatedElections />
             </RequireAuth>
           }
         />
