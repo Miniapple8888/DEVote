@@ -36,7 +36,7 @@ export const hasOngoingElection = async () => {
  */
 export const endElection = async () => {
   const accounts = await web3.eth.getAccounts();
-  return await smartContract.methods.endElection().call({
+  return await smartContract.methods.endElection().send({
     from: accounts[0],
   });
 }

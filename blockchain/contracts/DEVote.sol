@@ -29,15 +29,15 @@ contract DEVote {
      * @return boolean True if it still on going and false if not
      */
     function hasElectionGoing() public view returns (bool) {
-        address owner = elections[ongoingElections[msg.sender]].getOwner();
+        Election target = elections[ongoingElections[msg.sender]];
+        address owner = target.getOwner();
 
         if (owner != msg.sender) {
-            return true;
+            return false;
         }
 
-        bool status = elections[ongoingElections[msg.sender]]
-            .getElectionStatus();
-        return !status;
+        bool hasEnded = target.getElectionStatus();
+        return !hasEnded;
     }
 
     /*
@@ -87,33 +87,37 @@ contract DEVote {
     }
 
     /*
-    * This method returns ensures election exists and is ongoing
-    * Throws error otherwise
-    */
-
+     * This method returns ensures election exists and is ongoing
+     * Throws error otherwise
+     */
     function electionIsValid(uint _targetAddr) public view {
-        require(_targetAddr < elections.length && _targetAddr >= 0 && !elections[_targetAddr].getElectionStatus(), "election is not valid");
+        require(
+            _targetAddr < elections.length &&
+                _targetAddr >= 0 &&
+                !elections[_targetAddr].getElectionStatus(),
+            "election is not valid"
+        );
     }
 
     /*
-    * This method retrieves election timestamp and candidates if
-    * election associated to _targetAddr exists and is ongoing. Otherwise, throw error.
-    * @return uint256 timestamp
-    * @return string[] Array with the name of the candidates
-    */
-
-    function getElection(uint _targetAddr) public view returns(uint256, string[] memory) {
+     * This method retrieves election timestamp and candidates if
+     * election associated to _targetAddr exists and is ongoing. Otherwise, throw error.
+     * @return uint256 timestamp
+     * @return string[] Array with the name of the candidates
+     */
+    function getElection(
+        uint _targetAddr
+    ) public view returns (uint256, string[] memory) {
         electionIsValid(_targetAddr);
         Election election = elections[_targetAddr];
         return (election.getTimestamp(), election.getCandidates());
     }
 
     /*
-    * This method casts a vote on an election if election
-    * election associated to _targetAddr exists and is ongoing. Otherwise, throw error.
-    * Also throws an error if casting of the vote fails (invalid vote).
-    */
-
+     * This method casts a vote on an election if election
+     * election associated to _targetAddr exists and is ongoing. Otherwise, throw error.
+     * Also throws an error if casting of the vote fails (invalid vote).
+     */
     function castVoteOnElection(uint _targetAddr, string memory _vote) public {
         electionIsValid(_targetAddr);
         Election election = elections[_targetAddr];

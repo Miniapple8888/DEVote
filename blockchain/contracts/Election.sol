@@ -53,11 +53,11 @@ contract Election {
     }
 
     /*
-    * This method returns the deadline timestamp of the election
-    * @return uint256 deadline timestamp
-    */
+     * This method returns the deadline timestamp of the election
+     * @return uint256 deadline timestamp
+     */
 
-    function getTimestamp() public view returns(uint256) {
+    function getTimestamp() public view returns (uint256) {
         return timestamp;
     }
 
@@ -95,13 +95,11 @@ contract Election {
         hasEnded = true;
     }
 
-
     /*
-    * This method updates candidateVotes + addressVotes mappings + voters array to cast a vote
-    * requires: _voter to be a valid user address (EOA)
-    */
-
-    function castVote(address _voter, string memory _candidate) public {  
+     * This method updates candidateVotes + addressVotes mappings + voters array to cast a vote
+     * requires: _voter to be a valid user address (EOA)
+     */
+    function castVote(address _voter, string memory _candidate) public {
         // require _candidate is valid
         require(candidateExist[_candidate], "candidate doesn't exist");
         // Check if voter exists already in voters
