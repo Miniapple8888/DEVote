@@ -80,9 +80,9 @@ contract DEVote {
      * @return bool True if election ended, False if election was already ended
      */
     function endElection() public returns (bool) {
-        Election target = elections[ongoingElections[msg.sender]];
-        bool retVal = !target.getElectionStatus();
-        target.endElection();
+        bool retVal = !elections[ongoingElections[msg.sender]]
+            .getElectionStatus();
+        elections[ongoingElections[msg.sender]].endElection();
         return retVal;
     }
 
