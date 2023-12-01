@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from './Button';
+import { TextField } from '@mui/material';
 /* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
 
 const SearchForm = ({ handleSearchForm, validateSearchQuery }) => {
@@ -23,23 +24,22 @@ const SearchForm = ({ handleSearchForm, validateSearchQuery }) => {
 
     return (
         <form className="flex flex-col items-center" onSubmit={handleSubmit}>
-            <input
-                type="text"
+            <TextField
+                error={error}
                 placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => {
                     setSearchQuery(e.target.value)
                     setError(false) // Reset error when typing
                 }}
-                className={`border ${error ? 'border-red-500' : 'border-gray-300'} px-4 py-2 rounded-l-md focus:outline-none`}
             />
             <Button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 focus:outline-none"
+                className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 focus:outline-none"
             >
                 Search
             </Button>
-            { error && <p className="text-red-500">{errorMsg}</p> }
+            {error && <p className="text-red-500">{errorMsg}</p>}
         </form>
     )
 }
