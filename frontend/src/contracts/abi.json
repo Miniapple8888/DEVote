@@ -40,7 +40,7 @@
 				"type": "bool"
 			}
 		],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -54,6 +54,24 @@
 			}
 		],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getElectionsForUser",
+		"outputs": [
+			{
+				"internalType": "uint[]",
+				"name": "electionIDs",
+				"type": "uint[]"
+			},
+			{
+				"internalType": "bool[]",
+				"name": "electionStatuses",
+				"type": "bool[]"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	}
 ]

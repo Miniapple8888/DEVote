@@ -1,58 +1,22 @@
 import React, { useEffect, useState } from "react";
 import IconButton from "./IconButton";
 import TableHeader from "./TableHeader";
+import { getElectionsForUser } from "../../contracts/devote";
 
 const ViewParticipatedElections = () => {
-  const testExamples = [
-    {
-      electionID: "1",
-      hasEnded: false,
-    },
-    {
-      electionID: "2",
-      hasEnded: true,
-    },
-    {
-      electionID: "3",
-      hasEnded: false,
-    },
-    {
-      electionID: "4",
-      hasEnded: true,
-    },
-    {
-      electionID: "5",
-      hasEnded: false,
-    },
-    {
-      electionID: "6",
+  const [elections, setElections] = useState([]);
 
-      hasEnded: false,
-    },
-    {
-      electionID: "7",
-      hasEnded: false,
-    },
-    {
-      electionID: "8",
-      hasEnded: false,
-    },
-    {
-      electionID: "9",
-      hasEnded: false,
-    },
-    {
-      electionID: "10",
-      hasEnded: false,
-    },
-    {
-      electionID: "11",
-      hasEnded: false,
-    },
-  ];
-  const [elections, setElections] = useState(testExamples);
-
-  useEffect(() => {}, []);
+  useEffect(() => {
+    async function getElections() {
+      const { electionIDs, electionStatuses } = await getElectionsForUser();
+      let elections = [];
+      for (let i = 0; i < electionIDs.length; i++) {
+        elections.push({ electionID: electionIDs[i], hasEnded: electionStatuses[i] })
+      }
+      setElections(elections)
+    }
+    getElections()
+  }, []);
 
   return (
     <div className="w-full h-full flex flex-col gap-4">
@@ -80,11 +44,10 @@ const ViewParticipatedElections = () => {
                 <td className="w-1/6 border-x-2 border-white">
                   <div className="flex items-center justify-center">
                     <div
-                      className={`w-28 border rounded-full ${
-                        election.hasEnded
-                          ? "text-green-800 border-green-800 bg-green-200"
-                          : "text-yellow-800 border-yellow-800 bg-yellow-100"
-                      }`}
+                      className={`w-28 border rounded-full ${election.hasEnded
+                        ? "text-green-800 border-green-800 bg-green-200"
+                        : "text-yellow-800 border-yellow-800 bg-yellow-100"
+                        }`}
                     >
                       {`${election.hasEnded ? "Ended" : "On going"}`}
                     </div>
@@ -94,12 +57,12 @@ const ViewParticipatedElections = () => {
                   <div className="flex justify-center items-center gap-4">
                     <IconButton
                       text={"Election Results"}
-                      onClick={() => {}}
+                      onClick={() => { }}
                       disabled={!election.hasEnded}
                     />
                     <IconButton
                       text={"Recast vote"}
-                      onClick={() => {}}
+                      onClick={() => { }}
                       disabled={election.hasEnded}
                     />
                   </div>
