@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FindElection from './FindElection';
+import FindElection from '../../components/FindElection';
 import ElectionView from './ElectionView';
 
 const ViewResults = () => {

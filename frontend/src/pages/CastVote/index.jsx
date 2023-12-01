@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import FlashMsg from './common/FlashMsg'
-import Header from './common/Header'
-import FindElection from './FindElection'
+import FlashMsg from '../../components/FlashMsg'
+import Header from '../../components/Header'
+import FindElection from '../../components/FindElection'
 import VoteForm from './VoteForm'
 
 const CastVote = () => {

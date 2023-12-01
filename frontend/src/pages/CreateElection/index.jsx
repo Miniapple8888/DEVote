@@ -5,7 +5,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import TextField from "@mui/material/TextField";
 import { Button, DialogContent } from "@mui/material";
-import { startElection } from "../contracts/devote";
+import { startElection } from "../../contracts/devote";
 
 const CreateElection = () => {
   const [text, setText] = useState("");

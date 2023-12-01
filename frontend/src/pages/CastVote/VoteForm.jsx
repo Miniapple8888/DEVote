@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './common/Header';
+import Header from '../../components/Header';
 import OptionsForm from './OptionsForm';
 /* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
 

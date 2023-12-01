@@ -36,6 +36,9 @@ const SearchForm = ({ handleSearchForm, validateSearchQuery }) => {
             <Button
                 type="submit"
                 className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 focus:outline-none"
+                onClick={() => {
+                    
+                }}
             >
                 Search
             </Button>

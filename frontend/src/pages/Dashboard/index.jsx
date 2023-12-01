@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Button from './common/Button';
+import Button from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
