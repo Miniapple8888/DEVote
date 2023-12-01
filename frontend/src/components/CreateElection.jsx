@@ -4,7 +4,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import { Button, DialogContent } from "@mui/material";
 import { startElection } from "../contracts/devote";
 
 const CreateElection = () => {
@@ -33,11 +33,11 @@ const CreateElection = () => {
 
   const onSubmit = async () => {
     try {
-        await startElection(candidates);
-        console.log("Candidates submitted");
-        setIsModalOpen(false);
+      await startElection(candidates);
+      console.log("Candidates submitted");
+      setIsModalOpen(false);
     } catch (err) {
-        console.log(err)
+      console.log(err)
     }
   };
 
@@ -65,11 +65,12 @@ const CreateElection = () => {
         </form>
         {candidates.map((candidate, i) => (
           <Button
+            key={i}
             sx={{
               marginRight: "4px",
               ":hover": {
                 textDecoration: "line-through",
-                "text-decoration-thickness": "2px",
+                textDecorationThickness: "2px",
               },
             }}
             variant="outlined"
@@ -90,9 +91,11 @@ const CreateElection = () => {
       </div>
       <Dialog open={isModalOpen}>
         <DialogTitle>Are you sure?</DialogTitle>
-        <DialogContentText>
-          Confirm send of the inputted candidates?
-        </DialogContentText>
+        <DialogContent>
+          <DialogContentText>
+            Confirm send of the inputted candidates?
+          </DialogContentText>
+        </DialogContent>
         <DialogActions>
           <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
           <Button onClick={onSubmit}>Submit</Button>
