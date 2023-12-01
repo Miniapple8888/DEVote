@@ -38,6 +38,24 @@
 			},
 			{
 				"inputs": [],
+				"name": "getElectionsForUser",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					},
+					{
+						"internalType": "bool[]",
+						"name": "",
+						"type": "bool[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "hasElectionGoing",
 				"outputs": [
 					{
@@ -46,7 +64,7 @@
 						"type": "bool"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			}
 		],
@@ -63,7 +81,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"blockchain/contracts/DEVote.sol": "DEVote"
+			"Users/jamesfan/Documents/Coding/DEVote/blockchain/contracts/DEVote.sol": "DEVote"
 		},
 		"evmVersion": "shanghai",
 		"libraries": {},
@@ -77,20 +95,20 @@
 		"remappings": []
 	},
 	"sources": {
-		"blockchain/contracts/DEVote.sol": {
-			"keccak256": "0x1a490c7d2c73eed777e51f2e426a068fba9e763643fc149c879bcb6c4f53e0fb",
+		"Users/jamesfan/Documents/Coding/DEVote/blockchain/contracts/DEVote.sol": {
+			"keccak256": "0x56864218f710fcb3821a6dfdf8d8cb9ffe87a382f16f933a0a9c55c731f26bb4",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://a5f096ffe9279c181a8ac2a8063982abc3391dcc47e0e116b551da2591d25762",
-				"dweb:/ipfs/QmPiiECvRB1rnbbZme39BovoHcJtcrq46Su7Qr46nYbcjJ"
+				"bzz-raw://892a80351e7a166159f18ef72e116175da9663a3726b9be8ffca9bbfb37c216a",
+				"dweb:/ipfs/QmYsRpgEHBRqckXBEB42rB8PRwQPZhWNAErqemzKSfiyYw"
 			]
 		},
-		"blockchain/contracts/Election.sol": {
-			"keccak256": "0x0b6423494188344b8573a064bab4a21b3c476a0653e80fc4df05e8626bb1c8b0",
+		"Users/jamesfan/Documents/Coding/DEVote/blockchain/contracts/Election.sol": {
+			"keccak256": "0x0faa4459d34efd9617b8ebcd213437794a9eaee1926a1958f22efc4d789644dc",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://7727bc13a58dfb739023bbe2e5bbdcebfedffdb4cf1411c6960ae144ee047384",
-				"dweb:/ipfs/QmS4m6C2cQepfoQfqXJ6vaTmVUM8NaJ6zbaXSRKf4KGduT"
+				"bzz-raw://475218e64eea0fa8982a1ffc19ef6e7d7e22d2ae271a382595776323f95caf23",
+				"dweb:/ipfs/QmQzXSHkEV5gYLngctosjbQDg75MpigDsUHC7eAnWV8AQV"
 			]
 		}
 	},
