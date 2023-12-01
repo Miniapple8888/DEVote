@@ -7,12 +7,14 @@ import TextField from "@mui/material/TextField";
 import { Button, DialogContent } from "@mui/material";
 import { startElection } from "../../contracts/devote";
 import { useNavigate } from "react-router-dom";
+import LoadingScreen from "../../components/LoadingScreen";
 
 const CreateElection = () => {
   const [text, setText] = useState("");
   const [candidates, setCandidates] = useState([]);
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const onSubmitCandidates = () => {
     if (candidates.length < 2) {
@@ -35,11 +37,13 @@ const CreateElection = () => {
 
   const onSubmit = async () => {
     try {
+      setLoading(true);
+      setIsModalOpen(false);
       await startElection(candidates);
       console.log("Candidates submitted");
-      setIsModalOpen(false);
       // TODO: show flash message
-      navigate("/");
+      navigate("/dashboard");
+      setLoading(false);
     } catch (err) {
       console.log(err)
     }
@@ -47,6 +51,7 @@ const CreateElection = () => {
 
   return (
     <div className="flex justify-center">
+      <LoadingScreen loading={loading} />
       <div>
         <form className="mb-8" onSubmit={addCandidate}>
           <div className="flex items-stretch">
