@@ -20,6 +20,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "endElection",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "getElections",
 				"outputs": [
 					{
@@ -96,11 +109,19 @@
 	},
 	"sources": {
 		"Users/jamesfan/Documents/Coding/DEVote/blockchain/contracts/DEVote.sol": {
+<<<<<<< HEAD
 			"keccak256": "0x56864218f710fcb3821a6dfdf8d8cb9ffe87a382f16f933a0a9c55c731f26bb4",
 			"license": "GPL-3.0",
 			"urls": [
 				"bzz-raw://892a80351e7a166159f18ef72e116175da9663a3726b9be8ffca9bbfb37c216a",
 				"dweb:/ipfs/QmYsRpgEHBRqckXBEB42rB8PRwQPZhWNAErqemzKSfiyYw"
+=======
+			"keccak256": "0xc29f42b3040ce582e22eaab2f3c1a399c092a2d92ee78fb1fee455d2a12e3db0",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://24bd796864d0a3864eda353e6b3bdc40efd89daa2e1a50584ea06de79393cd06",
+				"dweb:/ipfs/QmZUEmaUEEf5ZV98pAyTAyTJ5sXsxKW5kcBTgpZjMyVcWk"
+>>>>>>> dc4f869 (end election)
 			]
 		},
 		"Users/jamesfan/Documents/Coding/DEVote/blockchain/contracts/Election.sol": {
