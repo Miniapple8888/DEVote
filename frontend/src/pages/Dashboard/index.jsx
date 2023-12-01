@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
-import im from './xiong.png';
+import im from './masterpiece.png';
 
 const Dashboard = () => {
   const [account, setAccount] = useState('');
