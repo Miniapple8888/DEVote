@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
+import im from './xiong.png';
 
 const Dashboard = () => {
   const [account, setAccount] = useState('');
   const navigate = useNavigate();
   const createElection = () => {
-      navigate("/createEndElection");
+    navigate("/createEndElection");
   }
 
   const viewResults = () => {
@@ -28,7 +29,7 @@ const Dashboard = () => {
     }
     getAccount();
   }, []);
-  
+
   return (
     <div className="flex flex-col gap-3 justify-center items-center">
       <p>Logged in as: {account}</p>
@@ -40,6 +41,7 @@ const Dashboard = () => {
         </Button>
         <Button onClick={viewResults}>View Election Results</Button>
       </div>
+      <img src={im} />
     </div>
   );
 };
