@@ -5,17 +5,23 @@ pragma solidity >=0.8.2 <0.9.0;
 import "./Election.sol";
 
 contract DEVote {
-    mapping(address => Election) elections;
+    Election[] elections;
+    // For viewing the currently ongoing election of a user
+    mapping(address => uint) ongoingElections;
 
     // For viewing the elections that a user has participated in
-    mapping(address => address[]) addressElections;
+    mapping(address => uint[]) addressElections;
 
     /*
      * This method initializes and creates a new election with the Election smart contract
      * @param candidates Array of the proposed candidates for the election
+     * @returns uint ID of created election
      */
-    function createElection(string[] memory candidates) public {
-        elections[msg.sender] = new Election(msg.sender, candidates);
+    function createElection(string[] memory candidates) public returns (uint) {
+        elections.push(new Election(msg.sender, candidates));
+        uint id = elections.length - 1;
+        ongoingElections[msg.sender] = id;
+        return id;
     }
 
     /*
@@ -23,13 +29,14 @@ contract DEVote {
      * @return boolean True if it still on going and false if not
      */
     function hasElectionGoing() public view returns (bool) {
-        address owner = elections[msg.sender].getOwner();
+        address owner = elections[ongoingElections[msg.sender]].getOwner();
 
         if (owner != msg.sender) {
             return true;
         }
 
-        bool status = elections[msg.sender].getElectionStatus();
+        bool status = elections[ongoingElections[msg.sender]]
+            .getElectionStatus();
         return !status;
     }
 
@@ -45,7 +52,7 @@ contract DEVote {
         view
         returns (string[] memory, uint256[] memory)
     {
-        return (elections[msg.sender].getVoteCount());
+        return (elections[ongoingElections[msg.sender]].getVoteCount());
     }
 
     /*
@@ -56,16 +63,16 @@ contract DEVote {
     function getElectionsForUser()
         public
         view
-        returns (address[] memory, bool[] memory)
+        returns (uint[] memory, bool[] memory)
     {
-        address[] memory addresses = addressElections[msg.sender];
+        uint[] memory electionIDs = addressElections[msg.sender];
         bool[] memory statuses = new bool[](
             addressElections[msg.sender].length
         );
-        for (uint i = 0; i < addresses.length; i++) {
-            statuses[i] = elections[addresses[i]].getElectionStatus();
+        for (uint i = 0; i < electionIDs.length; i++) {
+            statuses[i] = elections[electionIDs[i]].getElectionStatus();
         }
-        return (addresses, statuses);
+        return (electionIDs, statuses);
     }
 
     /*
@@ -73,7 +80,7 @@ contract DEVote {
      * @return bool True if election ended, False if election was already ended
      */
     function endElection() public returns (bool) {
-        Election target = elections[msg.sender];
+        Election target = elections[ongoingElections[msg.sender]];
         bool retVal = !target.getElectionStatus();
         target.endElection();
         return retVal;
