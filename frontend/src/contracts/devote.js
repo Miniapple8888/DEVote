@@ -25,7 +25,7 @@ export const startElection = async (candidates) => {
  */
 export const hasElectionGoing = async () => {
   const accounts = await web3.eth.getAccounts();
-  return await smartContract.methods.hasElectionGoing().send({
+  return await smartContract.methods.hasElectionGoing().call({
     from: accounts[0],
   });
 }
@@ -37,6 +37,17 @@ export const hasElectionGoing = async () => {
 export const endElection = async () => {
   const accounts = await web3.eth.getAccounts();
   return await smartContract.methods.endElection().send({
+    from: accounts[0],
+  });
+}
+
+/**
+ * This method gets the list of elections a user has participated in
+ * @returns [int[], bool[]] Array of election IDs, Array of election statuses (corresponds to the IDs)
+ */
+export const getElectionsForUser = async () => {
+  const accounts = await web3.eth.getAccounts();
+  return await smartContract.methods.getElectionsForUser().call({
     from: accounts[0],
   });
 }
