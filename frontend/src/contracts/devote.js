@@ -25,7 +25,7 @@ export const startElection = async (candidates) => {
  */
 export const hasOngoingElection = async () => {
   const accounts = await web3.eth.getAccounts();
-  return await smartContract.methods.hasElectionGoing().send({
+  return await smartContract.methods.hasElectionGoing().call({
     from: accounts[0],
   });
 }
