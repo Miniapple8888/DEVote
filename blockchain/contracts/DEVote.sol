@@ -85,4 +85,42 @@ contract DEVote {
         target.endElection();
         return retVal;
     }
+
+    /*
+    * This method returns ensures election exists and is ongoing
+    * Throws error otherwise
+    */
+
+    function electionIsValid(uint _targetAddr) public view {
+        require(_targetAddr < elections.length && _targetAddr >= 0 && !elections[_targetAddr].getElectionStatus(), "election is not valid");
+    }
+
+    /*
+    * This method retrieves election timestamp and candidates if
+    * election associated to _targetAddr exists and is ongoing. Otherwise, throw error.
+    * @return uint256 timestamp
+    * @return string[] Array with the name of the candidates
+    */
+
+    function getElection(uint _targetAddr) public view returns(uint256, string[] memory) {
+        electionIsValid(_targetAddr);
+        Election election = elections[_targetAddr];
+        return (election.getTimestamp(), election.getCandidates());
+    }
+
+    /*
+    * This method casts a vote on an election if election
+    * election associated to _targetAddr exists and is ongoing. Otherwise, throw error.
+    * Also throws an error if casting of the vote fails (invalid vote).
+    */
+
+    function castVoteOnElection(uint _targetAddr, string memory _vote) public {
+        electionIsValid(_targetAddr);
+        Election election = elections[_targetAddr];
+        election.castVote(msg.sender, _vote);
+        if (addressElections[msg.sender].length <= 0) {
+            addressElections[msg.sender] = new uint[](0);
+        }
+        addressElections[msg.sender].push(_targetAddr);
+    }
 }
