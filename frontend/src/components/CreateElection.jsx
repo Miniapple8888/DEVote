@@ -31,18 +31,13 @@ const CreateElection = () => {
     setCandidates(candidates.filter((c, i) => i !== idx));
   };
 
-  const onSubmit = () => {
-    // backend stuff, make a call with provider
-    startElection(candidates);
-    console.log("Candidates submitted");
-    setIsModalOpen(false);
-  };
-
-  const testSmartContract = async () => {
+  const onSubmit = async () => {
     try {
-      await startElection(["Mike", "James", "Mark"]);
+        await startElection(candidates);
+        console.log("Candidates submitted");
+        setIsModalOpen(false);
     } catch (err) {
-      console.log(err);
+        console.log(err)
     }
   };
 
