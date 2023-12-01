@@ -8,6 +8,24 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "_targetAddr",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_vote",
+						"type": "string"
+					}
+				],
+				"name": "castVoteOnElection",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "string[]",
 						"name": "candidates",
 						"type": "string[]"
@@ -35,6 +53,54 @@
 					}
 				],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_targetAddr",
+						"type": "uint256"
+					}
+				],
+				"name": "getElection",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string[]",
+						"name": "",
+						"type": "string[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "getElectionResults",
+				"outputs": [
+					{
+						"internalType": "string[]",
+						"name": "candidates",
+						"type": "string[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "numVotes",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -100,7 +166,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"Users/jamesfan/Documents/Coding/DEVote/blockchain/contracts/DEVote.sol": "DEVote"
+			"blockchain/contracts/DEVote.sol": "DEVote"
 		},
 		"evmVersion": "shanghai",
 		"libraries": {},
@@ -114,20 +180,20 @@
 		"remappings": []
 	},
 	"sources": {
-		"Users/jamesfan/Documents/Coding/DEVote/blockchain/contracts/DEVote.sol": {
-			"keccak256": "0x87722347d0a4208ccd06566b13711ce64e5845bf70995fb177d96661aaa2b237",
+		"blockchain/contracts/DEVote.sol": {
+			"keccak256": "0x0a25585adae36d8e0965c06e179f230b04f70b2b207feacd8119189e89e148e0",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://ed19c3fbeb1505db7d64443c8dfc9171e20906ae5035d3ff2993b14408273beb",
-				"dweb:/ipfs/QmfRnYPDVwLeSyrE8RQSsF1GqDWKmkU6V21Lh9xu77uwA3"
+				"bzz-raw://2da5b314b95bfa31850bd30c26ba5e797de1bd9a5404d5733c702cd1a9599db4",
+				"dweb:/ipfs/QmdzpWfEFYKAYMN5XJbNS6WZMqhcnBEgh8ggXswsMmkGtd"
 			]
 		},
-		"Users/jamesfan/Documents/Coding/DEVote/blockchain/contracts/Election.sol": {
-			"keccak256": "0x0faa4459d34efd9617b8ebcd213437794a9eaee1926a1958f22efc4d789644dc",
+		"blockchain/contracts/Election.sol": {
+			"keccak256": "0x52de1aa723cb6366c975a580871b4bbb55358584b714855ceb7ebcf1889c12c5",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://475218e64eea0fa8982a1ffc19ef6e7d7e22d2ae271a382595776323f95caf23",
-				"dweb:/ipfs/QmQzXSHkEV5gYLngctosjbQDg75MpigDsUHC7eAnWV8AQV"
+				"bzz-raw://e995311786fec42669eb6657f1ba228b1a96db7ae2219f58d724b1bec3343b15",
+				"dweb:/ipfs/Qmd69FCh1wwXSLfQ5xs1jWNUJFXzCogPrfvPFFjbkizcB7"
 			]
 		}
 	},

@@ -38,7 +38,6 @@ contract Election {
      * This method returns whether the election has ended or not
      * @return hasEnded Boolean true if it's ended and false if not
      */
-
     function getElectionStatus() public view returns (bool) {
         return hasEnded;
     }
@@ -47,7 +46,6 @@ contract Election {
      * This method returns the names of all the candidates
      * @return candidates Array with the name of the candidates
      */
-
     function getCandidates() public view returns (string[] memory) {
         return candidates;
     }
@@ -56,7 +54,6 @@ contract Election {
     * This method returns the deadline timestamp of the election
     * @return uint256 deadline timestamp
     */
-
     function getTimestamp() public view returns(uint256) {
         return timestamp;
     }
@@ -83,7 +80,6 @@ contract Election {
      * This method gets the owner of the contract
      * @return owner The address of the owner of the election
      */
-
     function getOwner() public view returns (address) {
         return owner;
     }
@@ -100,7 +96,6 @@ contract Election {
     * This method updates candidateVotes + addressVotes mappings + voters array to cast a vote
     * requires: _voter to be a valid user address (EOA)
     */
-
     function castVote(address _voter, string memory _candidate) public {  
         // require _candidate is valid
         require(candidateExist[_candidate], "candidate doesn't exist");
