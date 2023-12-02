@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FlashMsg from "../../components/FlashMsg";
 import Header from "../../components/Header";
 import FindElection from "../../components/FindElection";
 import VoteForm from "./VoteForm";
 import { getElection, castVoteOnElection } from "../../contracts/devote";
 import LoadingScreen from "../../components/LoadingScreen";
+import { useSearchParams } from "react-router-dom";
 
 const CastVote = () => {
   const [electionAddress, setElectionAddress] = useState("");
@@ -13,6 +14,8 @@ const CastVote = () => {
   const [candidates, setCandidates] = useState([]);
   const [timestamp, setTimestamp] = useState("");
   const [loading, setLoading] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryParam = searchParams.get("electionID");
 
   const handleSearchForm = async (searchQuery) => {
     try {
@@ -20,7 +23,6 @@ const CastVote = () => {
       getElection(searchQuery)
         .then(({ _timestamp, _candidates }) => {
           setCandidates([...candidates, ..._candidates]);
-          console.log(candidates);
           const timestampInMilliseconds = parseInt(_timestamp) * 1000;
           const date = new Date(timestampInMilliseconds);
           setTimestamp(
@@ -68,8 +70,14 @@ const CastVote = () => {
     }
   };
 
+  useEffect(() => {
+    if (queryParam) {
+      handleSearchForm(queryParam);
+    }
+  }, [queryParam]);
+
   return (
-    <div>
+    <div className="w-full h-full flex flex-col gap-4 items-center">
       {alertMsg && (
         <FlashMsg message={alertMsg} severity={alertSeverity} duration={3000} />
       )}

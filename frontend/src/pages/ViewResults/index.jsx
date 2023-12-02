@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FindElection from "../../components/FindElection";
 import ElectionView from "./ElectionView";
 import Header from "../../components/Header";
 import { getElectionResults } from "../../contracts/devote";
+import { useSearchParams } from "react-router-dom";
 
 const ViewResults = () => {
   const [election, setElection] = useState();
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryParam = searchParams.get("electionID");
+
   const validateSearchQuery = (searchQuery) => {
     return searchQuery.trim() === "";
   };
@@ -38,6 +42,13 @@ const ViewResults = () => {
       setErrorMessage(err.message);
     }
   };
+
+  useEffect(() => {
+    if (queryParam) {
+      handleSearchForm(queryParam);
+    }
+  }, [queryParam]);
+
   return (
     <div className="w-full h-full flex flex-col items-center gap-4">
       <Header>View Election Results</Header>
@@ -45,7 +56,9 @@ const ViewResults = () => {
         handleSearchForm={handleSearchForm}
         validateSearchQuery={validateSearchQuery}
       />
-      {!isError ? (election && <ElectionView election={election}/>) : (
+      {!isError ? (
+        election && <ElectionView election={election} />
+      ) : (
         <p>{errorMessage}</p>
       )}
     </div>
