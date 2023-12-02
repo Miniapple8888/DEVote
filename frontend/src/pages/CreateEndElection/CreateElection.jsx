@@ -53,13 +53,14 @@ const CreateElection = () => {
     <div className="w-full h-full flex flex-col items-center gap-4">
       <LoadingScreen loading={loading} />
       <div className="w-full h-full flex flex-col items-center gap-4">
-        <form className="flex items-stretch gap-3" onSubmit={addCandidate}>
+        <form className="flex justify-center items-center gap-3" onSubmit={addCandidate}>
           <TextField
             label="Enter Candidate..."
             variant="outlined"
             value={text}
             onChange={(e) => setText(e.target.value)}
             onSubmit={addCandidate}
+            size="small"
           />
           <Button
             type="submit"
@@ -70,7 +71,7 @@ const CreateElection = () => {
           </Button>
         </form>
         <div className="w-full flex items-center justify-center gap-2">
-          {candidates.map((candidate, i) => (
+          {candidates.length > 0 ? candidates.map((candidate, i) => (
             <Button
               key={i}
               sx={{
@@ -85,7 +86,13 @@ const CreateElection = () => {
             >
               {candidate}
             </Button>
-          ))}
+          )) : (
+            <h1 className="">
+              You haven't added any candidates
+            </h1>
+          )
+          
+          }
         </div>
         {candidates.length > 0 && <p>Click candidate name to remove</p>}
         {error && <p className="text-red-600">{error}</p>}
