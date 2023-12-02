@@ -5,7 +5,7 @@ import OptionsForm from './OptionsForm';
 
 const VoteForm = ({ electionAddr, candidates, date, handleCastedVote }) => {
     return (
-    <div>
+    <div className='flex flex-col items-center gap-4'>
         <Header>Cast Vote for Election {electionAddr}</Header>
         <p>Election started on {date}</p>
         <OptionsForm options={candidates} handleSubmitForm={handleCastedVote} />

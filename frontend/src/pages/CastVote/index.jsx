@@ -77,7 +77,7 @@ const CastVote = () => {
   }, [queryParam]);
 
   return (
-    <div>
+    <div className="w-full h-full flex flex-col gap-4 items-center">
       {alertMsg && (
         <FlashMsg message={alertMsg} severity={alertSeverity} duration={3000} />
       )}
