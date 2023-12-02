@@ -31,7 +31,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col gap-3 items-center">
+    <div className="w-full h-full flex flex-col gap-4 items-center">
       <p>Logged in as: {account}</p>
       <div className="flex justify-center items-center gap-5">
         <Button onClick={createElection}>Create/End Election</Button>
@@ -41,7 +41,7 @@ const Dashboard = () => {
         </Button>
         <Button onClick={viewResults}>View Election Results</Button>
       </div>
-      <div className="w-full h-[40rem]">
+      <div className="w-full h-[38rem]">
         <img className="w-full h-full object-contain" src={masterpiece} alt="masterpiece" />
       </div>
     </div>

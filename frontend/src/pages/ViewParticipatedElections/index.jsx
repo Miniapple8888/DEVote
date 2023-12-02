@@ -23,9 +23,9 @@ const ViewParticipatedElections = () => {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col gap-4">
+    <div className="w-full h-full flex flex-col gap-4 items-center">
       <Header>Elections you've participated in</Header>
-      <div className="w-full h-[30rem] overflow-y-auto border rounded-lg shadow-sm bg-slate-100">
+      <div className="w-full h-[40rem] overflow-y-auto border rounded-lg shadow-sm bg-slate-100">
         {elections.length > 0 ? (
           <table className="w-full h-full">
             <thead className="sticky top-0">
