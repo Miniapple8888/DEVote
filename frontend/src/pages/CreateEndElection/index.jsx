@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { endElection, hasOngoingElection } from "../../contracts/devote";
+import { endElection, getOngoingElectionID } from "../../contracts/devote";
 import CreateElection from "./CreateElection";
+import Header from "../../components/Header";
 import { Button } from "@mui/material";
 import LoadingScreen from "../../components/LoadingScreen";
-import Header from "../../components/Header";
+
+// @ts-ignore
+const NO_ONGOING_ELECTION = -1n;
 
 const CreateEndElection = () => {
   const [loading, setLoading] = useState(true);
-  const [hasOngoing, setHasOngoing] = useState(false);
+  const [electionID, setElectionID] = useState(NO_ONGOING_ELECTION);
   const onEndElection = async () => {
     setLoading(true);
     const result = await endElection();
@@ -16,12 +19,12 @@ const CreateEndElection = () => {
     } else {
       console.log("Election was already ended");
     }
-    setHasOngoing(false);
+    setElectionID(NO_ONGOING_ELECTION);
     setLoading(false);
   };
   useEffect(() => {
     async function checkOngoingElection() {
-      setHasOngoing(await hasOngoingElection());
+      setElectionID(await getOngoingElectionID());
       setLoading(false);
     }
     checkOngoingElection();
@@ -30,17 +33,13 @@ const CreateEndElection = () => {
     <div className="w-full h-full">
       {loading ? (
         <LoadingScreen />
-      ) : hasOngoing ? (
+      ) : electionID !== NO_ONGOING_ELECTION ? (
         <div className="flex flex-col gap-4 items-center">
-            <Header>You already have an on going election</Header>
-            <h1>Election ID: </h1>
-            <Button
-            variant="contained"
-            color="warning"
-            onClick={onEndElection}
-            >
+          <Header>You already have an on going election</Header>
+          <h1>Election ID: {electionID.toString()}</h1>
+          <Button variant="contained" color="warning" onClick={onEndElection}>
             End Current Election
-            </Button>
+          </Button>
         </div>
       ) : (
         <CreateElection />

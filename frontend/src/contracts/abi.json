@@ -32,12 +32,12 @@
 	},
 	{
 		"inputs": [],
-		"name": "hasElectionGoing",
+		"name": "getOngoingElectionID",
 		"outputs": [
 			{
-				"internalType": "bool",
+				"internalType": "int",
 				"name": "",
-				"type": "bool"
+				"type": "int"
 			}
 		],
 		"stateMutability": "view",

@@ -4,28 +4,29 @@ import Web3 from "web3";
 
 // @ts-ignore
 // CONTRACT CONFIGURATION
-const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS;
+const CONTRACT_ADDRESS = "0xA7884237f5F1DD73f762da30b125f5D2355C4394";
 const web3 = new Web3(window.ethereum);
 const smartContract = new web3.eth.Contract(contractAbi, CONTRACT_ADDRESS);
 
 /**
  * This method connects to the smart contract to start a new election
  * @param candidates[] Array with the name of the candidates
+ * @returns int ID of created election
  */
 export const startElection = async (candidates) => {
   const accounts = await web3.eth.getAccounts();
-  await smartContract.methods.createElection(candidates).send({
+  return await smartContract.methods.createElection(candidates).send({
     from: accounts[0],
   });
 };
 
 /**
- * This method connects to the smart contract to start a new election
- * @returns bool True if user has an ongoing election, false otherwise
+ * This method gets the ongoing election ID of the user
+ * @returns bigint Ongoing election ID, -1 if none exists
  */
-export const hasOngoingElection = async () => {
+export const getOngoingElectionID = async () => {
   const accounts = await web3.eth.getAccounts();
-  return await smartContract.methods.hasElectionGoing().call({
+  return await smartContract.methods.getOngoingElectionID().call({
     from: accounts[0],
   });
 }
