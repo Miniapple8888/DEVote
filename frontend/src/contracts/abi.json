@@ -61,12 +61,12 @@
 		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "_timestamp",
 				"type": "uint256"
 			},
 			{
 				"internalType": "string[]",
-				"name": "",
+				"name": "_candidates",
 				"type": "string[]"
 			}
 		],
@@ -102,6 +102,19 @@
 				"internalType": "bool",
 				"name": "hasEnded",
 				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getOngoingElectionID",
+		"outputs": [
+			{
+				"internalType": "int",
+				"name": "",
+				"type": "int"
 			}
 		],
 		"stateMutability": "view",

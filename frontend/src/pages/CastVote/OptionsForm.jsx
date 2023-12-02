@@ -9,7 +9,8 @@ const OptionsForm = ({ options, handleSubmitForm }) => {
         setSelectedOption(event.target.value)
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
         handleSubmitForm(selectedOption)
     }
 
@@ -23,15 +24,15 @@ const OptionsForm = ({ options, handleSubmitForm }) => {
     )
 }
 
-const RadioOption = ({ key, selectedOption, handleRadioChange, children }) => {
+const RadioOption = ({ selectedOption, handleRadioChange, children }) => {
     return (
         <label className="flex items-center space-x-2">
             <input
-            type="radio"
-            value={children}
-            checked={selectedOption === children}
-            onChange={handleRadioChange}
-            className="form-radio text-blue-500 h-5 w-5"
+                type="radio"
+                value={children}
+                checked={selectedOption === children}
+                onChange={handleRadioChange}
+                className="form-radio text-blue-500 h-5 w-5"
             />
             <span className="text-gray-700">{children}</span>
         </label>

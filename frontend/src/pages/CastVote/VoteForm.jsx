@@ -7,7 +7,7 @@ const VoteForm = ({ electionAddr, candidates, date, handleCastedVote }) => {
     return (
     <div>
         <Header>Cast Vote for Election {electionAddr}</Header>
-        <p>Election ending on {date}</p>
+        <p>Election started on {date}</p>
         <OptionsForm options={candidates} handleSubmitForm={handleCastedVote} />
     </div>
     )
