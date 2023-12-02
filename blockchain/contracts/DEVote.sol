@@ -132,7 +132,7 @@ contract DEVote {
         public
         view
         electionIsValid(id)
-        returns (uint256, string[] memory)
+        returns (uint256 _timestamp, string[] memory _candidates)
     {
         Election election = elections[id];
         return (election.getTimestamp(), election.getCandidates());

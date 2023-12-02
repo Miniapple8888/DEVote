@@ -37,43 +37,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_targetAddr",
-				"type": "uint256"
-			}
-		],
-		"name": "electionIsValid",
-		"outputs": [],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_targetAddr",
-				"type": "uint256"
-			}
-		],
-		"name": "getElection",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "_deadline",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string[]",
-				"name": "_candidates",
-				"type": "string[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "endElection",
 		"outputs": [
@@ -98,12 +61,12 @@
 		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "_timestamp",
 				"type": "uint256"
 			},
 			{
 				"internalType": "string[]",
-				"name": "",
+				"name": "_candidates",
 				"type": "string[]"
 			}
 		],

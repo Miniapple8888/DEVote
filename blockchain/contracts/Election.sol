@@ -51,8 +51,8 @@ contract Election {
     }
 
     /*
-    * This method returns the deadline timestamp of the election
-    * @return uint256 deadline timestamp
+    * This method returns the creation timestamp of the election
+    * @return uint256 timestamp
     */
     function getTimestamp() public view returns(uint256) {
         return timestamp;

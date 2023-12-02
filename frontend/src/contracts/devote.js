@@ -4,7 +4,7 @@ import Web3 from "web3";
 
 // @ts-ignore
 // CONTRACT CONFIGURATION
-const CONTRACT_ADDRESS = "0xEA687f9f44692edB806E8EC391C8A29D4a620f34";
+const CONTRACT_ADDRESS = "0x7adc978D61947ba24D0D876F8f0474d285b6a836";
 const web3 = new Web3(window.ethereum);
 const smartContract = new web3.eth.Contract(contractAbi, CONTRACT_ADDRESS);
 
@@ -75,7 +75,6 @@ export const getElectionsForUser = async () => {
   return await smartContract.methods.castVoteOnElection(electionId, vote).send({
     from: accounts[0],
   });
-}
 };
 
 /**

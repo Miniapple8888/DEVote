@@ -10,17 +10,17 @@ const CastVote = () => {
     const [alertMsg, setAlertMsg] = useState('')
     const [alertSeverity, setAlertSeverity] = useState('')
     const [candidates, setCandidates] = useState([])
-    const [deadline, setDeadline] = useState('')
+    const [timestamp, setTimestamp] = useState('')
 
     const handleSearchForm = (async (searchQuery) => {
         try {
             getElection(BigInt(electionAddress))
-                .then(({ _deadline, _candidates }) => {
+                .then(({ _timestamp, _candidates }) => {
                     setCandidates([...candidates, ..._candidates])
                     console.log(candidates)
-                    const timestampInMilliseconds = parseInt(_deadline) * 1000;
+                    const timestampInMilliseconds = parseInt(_timestamp) * 1000;
                     const date = new Date(timestampInMilliseconds);
-                    setDeadline(date.toLocaleString('en-US', {
+                    setTimestamp(date.toLocaleString('en-US', {
                         year: 'numeric',
                         month: '2-digit',
                         day: '2-digit',
@@ -65,7 +65,7 @@ const CastVote = () => {
             <Header>1. Cast vote</Header>
             {electionAddress == "" ?
                 <FindElection handleSearchForm={handleSearchForm} validateSearchQuery={validateSearchQuery} /> :
-                <VoteForm electionAddr={electionAddress} candidates={candidates} date={deadline} handleCastedVote={handleCastedVote} />
+                <VoteForm electionAddr={electionAddress} candidates={candidates} date={timestamp} handleCastedVote={handleCastedVote} />
             }
         </div>
     )
