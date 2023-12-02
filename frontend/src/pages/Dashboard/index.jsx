@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import masterpiece from "./masterpiece.png";
 import DashboardCard from "./DashboardCard";
 import ListCard from "./ListCard";
+import DashboardList from "./DashboardList";
+import CandidateCard from "./CandidateCard";
 
 const Dashboard = () => {
   const [account, setAccount] = useState("");
@@ -55,18 +57,14 @@ const Dashboard = () => {
           {!allUserElections ? (
             <div className="w-full h-full flex flex-col items-center gap-4">
               <h1 className="text-sm">Created Elections</h1>
-
-              <div className="w-full h-56 flex flex-col overflow-y-auto">
-                <div>
-                  <ListCard id={1} status={true}/>
-                  <ListCard id={1} status={true}/>
-                  <ListCard id={1} status={true}/>
-                  <ListCard id={1} status={false}/>
-                  <ListCard id={1} status={false}/>
-                  <ListCard id={1} status={false}/>
-
-                </div>
-              </div>
+              <DashboardList>
+                <ListCard id={1} status={true} clickHandler={() => {}} />
+                <ListCard id={1} status={true} clickHandler={() => {}} />
+                <ListCard id={1} status={true} clickHandler={() => {}} />
+                <ListCard id={1} status={false} clickHandler={() => {}} />
+                <ListCard id={1} status={false} clickHandler={() => {}} />
+                <ListCard id={1} status={false} clickHandler={() => {}} />
+              </DashboardList>
             </div>
           ) : (
             <h1 className="text-sm text-gray-700">
@@ -77,10 +75,27 @@ const Dashboard = () => {
 
         {/* Your current election */}
         <DashboardCard>
-          {userElection ? (
-            <div className="w-full h-full flex flex-col items-center gap-2">
+          {!userElection ? (
+            <div className="w-full h-full flex flex-col items-center gap-4">
               <h1 className="text-sm">Your Current Election Statistics</h1>
-              <div className="table"></div>
+              <div className="w-full h-full flex justify-between gap-4">
+                <DashboardList>
+                  <CandidateCard candidateName={"Miguel"} numVotes={2}/>
+                  <CandidateCard candidateName={"Miguel"} numVotes={2}/>
+                  <CandidateCard candidateName={"Miguel"} numVotes={2}/>
+                  <CandidateCard candidateName={"Miguel"} numVotes={2}/>
+                  <CandidateCard candidateName={"Miguel"} numVotes={2}/>
+                  <CandidateCard candidateName={"Miguel"} numVotes={2}/>
+
+
+                </DashboardList>
+                <div className="w-0 h-full border-r"></div>
+                <div className="w-full flex flex-col items-center justify-center gap-4">
+                  <h1 className="font-bold">Current Winner: </h1>
+                  <p className=" font-bold border w-36 py-1 rounded-full flex items-center justify-center bg-blue-100 text-blue-500 border-blue-500">Miguel</p>
+                  <p>Votes: 2</p>
+                </div>
+              </div>
             </div>
           ) : (
             <h1 className="text-sm text-gray-700">
