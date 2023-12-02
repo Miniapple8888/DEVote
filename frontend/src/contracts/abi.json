@@ -2,14 +2,88 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "_targetAddr",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_vote",
+				"type": "string"
+			}
+		],
+		"name": "castVoteOnElection",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "string[]",
 				"name": "candidates",
 				"type": "string[]"
 			}
 		],
 		"name": "createElection",
-		"outputs": [],
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_targetAddr",
+				"type": "uint256"
+			}
+		],
+		"name": "electionIsValid",
+		"outputs": [],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "endElection",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_targetAddr",
+				"type": "uint256"
+			}
+		],
+		"name": "getElection",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "_deadline",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string[]",
+				"name": "_candidates",
+				"type": "string[]"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -45,7 +119,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "endElection",
+		"name": "hasElectionGoing",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -53,7 +127,7 @@
 				"type": "bool"
 			}
 		],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{

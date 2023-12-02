@@ -129,7 +129,7 @@ contract DEVote {
      */
     function getElection(
         uint256 id
-    ) public view electionIsValid(id) returns (uint256, string[] memory) {
+    ) public view electionIsValid(id) returns (uint256 _deadline, string[] memory _candidates) {
         Election election = elections[id];
         return (election.getTimestamp(), election.getCandidates());
     }

@@ -3,39 +3,71 @@ import FlashMsg from '../../components/FlashMsg'
 import Header from '../../components/Header'
 import FindElection from '../../components/FindElection'
 import VoteForm from './VoteForm'
+import { getElection, castVoteOnElection } from "../../contracts/devote";
 
 const CastVote = () => {
     const [electionAddress, setElectionAddress] = useState('')
     const [alertMsg, setAlertMsg] = useState('')
     const [alertSeverity, setAlertSeverity] = useState('')
-    const randData = ["John Doe", "Jane Doe"];
+    const [candidates, setCandidates] = useState([])
+    const [deadline, setDeadline] = useState('')
 
-    const handleSearchForm = ((searchQuery) => {
-        setElectionAddress(searchQuery);
-        // retrieve candidates data from election id
-        // maybe retrieve election expiration as well
+    const handleSearchForm = (async (searchQuery) => {
+        try {
+            getElection(BigInt(electionAddress))
+                .then(({ _deadline, _candidates }) => {
+                    setCandidates([...candidates, ..._candidates])
+                    console.log(candidates)
+                    const timestampInMilliseconds = parseInt(_deadline) * 1000;
+                    const date = new Date(timestampInMilliseconds);
+                    setDeadline(date.toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        timeZone: 'UTC', // Adjust the timezone as needed
+                    }))
+                    setElectionAddress(searchQuery);
+                }).catch(err => {
+                    console.log(err)
+                    throw(err)
+                })
+            
+        } catch (err) {
+            console.log(err)
+            setAlertMsg("Election id is invalid!")
+            setAlertSeverity("error")
+            setElectionAddress('')
+        }
     })
 
     const validateSearchQuery = ((searchQuery) => {
         return searchQuery.trim() === ''
     })
 
-    const handleCastedVote = (vote) => {
-        // do something with the vote (change smart contract)
-        // ensure election Address exists
-        setAlertMsg("Successfully casted vote")
-        setAlertSeverity("success")
+    const handleCastedVote = async (vote) => {
+        try {
+            await castVoteOnElection(electionAddress, vote)
+            setAlertMsg("Successfully casted vote")
+            setAlertSeverity("success")
+        } catch (err) {
+            console.log(err)
+            setAlertMsg("Vote is invalid. Try again!")
+            setAlertSeverity("error")
+        }
     }
 
     return (
-    <div>
-        {alertMsg && <FlashMsg message={alertMsg} severity={alertSeverity} duration={3000} />}
-        <Header>1. Cast vote</Header>
-        {electionAddress == "" ?
-         <FindElection handleSearchForm={handleSearchForm} validateSearchQuery={validateSearchQuery} /> :
-         <VoteForm electionAddr={electionAddress} candidates={randData} date="12/03/2024" handleCastedVote={handleCastedVote} />
-        }
-    </div>
+        <div>
+            {alertMsg && <FlashMsg message={alertMsg} severity={alertSeverity} duration={3000} />}
+            <Header>1. Cast vote</Header>
+            {electionAddress == "" ?
+                <FindElection handleSearchForm={handleSearchForm} validateSearchQuery={validateSearchQuery} /> :
+                <VoteForm electionAddr={electionAddress} candidates={candidates} date={deadline} handleCastedVote={handleCastedVote} />
+            }
+        </div>
     )
 }
 

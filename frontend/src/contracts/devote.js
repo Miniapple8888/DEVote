@@ -4,7 +4,7 @@ import Web3 from "web3";
 
 // @ts-ignore
 // CONTRACT CONFIGURATION
-const CONTRACT_ADDRESS = "0xA7884237f5F1DD73f762da30b125f5D2355C4394";
+const CONTRACT_ADDRESS = "0xEA687f9f44692edB806E8EC391C8A29D4a620f34";
 const web3 = new Web3(window.ethereum);
 const smartContract = new web3.eth.Contract(contractAbi, CONTRACT_ADDRESS);
 
@@ -49,6 +49,30 @@ export const endElection = async () => {
 export const getElectionsForUser = async () => {
   const accounts = await web3.eth.getAccounts();
   return await smartContract.methods.getElectionsForUser().call({
+    from: accounts[0],
+  });
+}
+
+/**
+ * This method connects to the smart contract to get a specific election
+ * @param electionId integer addres of the election
+ * @returns [int timestamp, candidates[] array of candidates]
+ */
+ export const getElection = async (electionId) => {
+  const accounts = await web3.eth.getAccounts();
+  return await smartContract.methods.getElection(electionId).call({
+    from: accounts[0],
+  });
+}
+
+/**
+ * This method connects to the smart contract to cast a vote
+ * @param electionId integer address of the election
+ * @param vote string of the candidate
+ */
+ export const castVoteOnElection = async (electionId, vote) => {
+  const accounts = await web3.eth.getAccounts();
+  return await smartContract.methods.castVoteOnElection(electionId, vote).send({
     from: accounts[0],
   });
 }
