@@ -99,7 +99,7 @@ contract Election {
         // require _candidate is valid
         require(candidateExist[_candidate], "candidate doesn't exist");
         // Check if voter exists already in voters
-        if (voterExist[_voter]) {
+        if (voterExists(_voter)) {
             string memory prevVote = addressVotes[_voter];
             candidateVotes[prevVote]--;
         } else {
@@ -108,5 +108,13 @@ contract Election {
         }
         candidateVotes[_candidate]++;
         addressVotes[_voter] = _candidate;
+    }
+
+    /*
+     * This method returns whether voter is already in election
+     * @return bool voter already in election
+     */
+    function voterExists(address _voter) public view returns(bool) {
+        return voterExist[_voter];
     }
 }

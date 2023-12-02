@@ -148,11 +148,14 @@ contract DEVote {
         electionIsValid(id)
     {
         Election election = elections[id];
-        election.castVote(msg.sender, _vote);
-        if (addressElections[msg.sender].length <= 0) {
-            addressElections[msg.sender] = new uint256[](0);
+        if (!election.voterExists(msg.sender)) {
+            if (addressElections[msg.sender].length <= 0) {
+                addressElections[msg.sender] = new uint256[](0);
+            }
+            addressElections[msg.sender].push(id);
         }
-        addressElections[msg.sender].push(id);
+        election.castVote(msg.sender, _vote);
+        
     }
 
     /*

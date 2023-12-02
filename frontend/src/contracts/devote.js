@@ -4,7 +4,7 @@ import Web3 from "web3";
 
 // @ts-ignore
 // CONTRACT CONFIGURATION
-const CONTRACT_ADDRESS = "0x7adc978D61947ba24D0D876F8f0474d285b6a836";
+const CONTRACT_ADDRESS = "0xe6A240f708fF9c6d9e3E6f90a56722c362801650";
 const web3 = new Web3(window.ethereum);
 const smartContract = new web3.eth.Contract(contractAbi, CONTRACT_ADDRESS);
 
