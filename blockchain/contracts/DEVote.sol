@@ -93,16 +93,16 @@ contract DEVote {
     function getElectionsForUser()
         public
         view
-        returns (uint256[] memory, bool[] memory)
+        returns (uint256[] memory electionIDs, bool[] memory electionStatuses)
     {
-        uint256[] memory electionIDs = addressElections[msg.sender];
+        uint256[] memory _electionIDs = addressElections[msg.sender];
         bool[] memory statuses = new bool[](
             addressElections[msg.sender].length
         );
-        for (uint256 i = 0; i < electionIDs.length; i++) {
-            statuses[i] = elections[electionIDs[i]].getElectionStatus();
+        for (uint256 i = 0; i < _electionIDs.length; i++) {
+            statuses[i] = elections[_electionIDs[i]].getElectionStatus();
         }
-        return (electionIDs, statuses);
+        return (_electionIDs, statuses);
     }
 
     /*
@@ -157,11 +157,12 @@ contract DEVote {
 
     /*
      * This function gets the election results as a tuple matching arrays.
-     * The candidates of one person 1 will be equal to the index in numVotes 1
-     * candidates[1] -> numVotes[1]
      * @param id The id of the election
-     * @return string[] Array with the name of the candidates
-     * @return numVotes[] Array with the number of votes for each candidate
+     * @return timestamp Time of creation of the election
+     * @return candidates Array with the names of the candidates
+     * @return candidateVotes[] Array with the number of votes for each candidate
+     * @return hasEnded Boolean to know if the election has ended
+
      */
     function getElectionResults(uint256 id)
         public

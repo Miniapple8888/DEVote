@@ -181,12 +181,12 @@
 		"outputs": [
 			{
 				"internalType": "uint256[]",
-				"name": "",
+				"name": "electionIDs",
 				"type": "uint256[]"
 			},
 			{
 				"internalType": "bool[]",
-				"name": "",
+				"name": "electionStatuses",
 				"type": "bool[]"
 			}
 		],
@@ -195,12 +195,12 @@
 	},
 	{
 		"inputs": [],
-		"name": "hasElectionGoing",
+		"name": "getOngoingElectionID",
 		"outputs": [
 			{
-				"internalType": "bool",
+				"internalType": "int256",
 				"name": "",
-				"type": "bool"
+				"type": "int256"
 			}
 		],
 		"stateMutability": "view",
