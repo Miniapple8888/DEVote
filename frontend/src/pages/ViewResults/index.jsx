@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import FindElection from '../../components/FindElection';
 import ElectionView from './ElectionView';
+import Header from '../../components/Header';
 
 const ViewResults = () => {
     const [election, setElection] = useState();
@@ -16,7 +17,8 @@ const ViewResults = () => {
         setElection(testElection)
     })
     return (
-        <div>
+        <div className='w-full h-full flex flex-col items-center gap-4'>
+            <Header>View Election Results</Header>
             <FindElection handleSearchForm={handleSearchForm} validateSearchQuery={validateSearchQuery} />
             {election && <ElectionView election={election} />}
         </div>

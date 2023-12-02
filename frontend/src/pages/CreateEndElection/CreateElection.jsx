@@ -45,56 +45,58 @@ const CreateElection = () => {
       navigate("/dashboard");
       setLoading(false);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="w-full h-full flex flex-col items-center gap-4">
       <LoadingScreen loading={loading} />
-      <div>
-        <form className="mb-8" onSubmit={addCandidate}>
-          <div className="flex items-stretch">
-            <TextField
-              label="Enter Candidate..."
-              variant="outlined"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              onSubmit={addCandidate}
-            />
-            <Button
-              sx={{ marginLeft: "10px" }}
-              type="submit"
-              variant="contained"
-              onClick={addCandidate}
-            >
-              Add
-            </Button>
-          </div>
-        </form>
-        {candidates.map((candidate, i) => (
-          <Button
-            key={i}
-            sx={{
-              marginRight: "4px",
-              ":hover": {
-                textDecoration: "line-through",
-                textDecorationThickness: "2px",
-              },
-            }}
+      <div className="w-full h-full flex flex-col items-center gap-4">
+        <form className="flex justify-center items-center gap-3" onSubmit={addCandidate}>
+          <TextField
+            label="Enter Candidate..."
             variant="outlined"
-            onClick={() => removeCandidate(i)}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            onSubmit={addCandidate}
+            size="small"
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            onClick={addCandidate}
           >
-            {candidate}
+            Add
           </Button>
-        ))}
+        </form>
+        <div className="w-full flex items-center justify-center gap-2">
+          {candidates.length > 0 ? candidates.map((candidate, i) => (
+            <Button
+              key={i}
+              sx={{
+                marginRight: "4px",
+                ":hover": {
+                  textDecoration: "line-through",
+                  textDecorationThickness: "2px",
+                },
+              }}
+              variant="outlined"
+              onClick={() => removeCandidate(i)}
+            >
+              {candidate}
+            </Button>
+          )) : (
+            <h1 className="">
+              You haven't added any candidates
+            </h1>
+          )
+          
+          }
+        </div>
         {candidates.length > 0 && <p>Click candidate name to remove</p>}
         {error && <p className="text-red-600">{error}</p>}
-        <Button
-          sx={{ display: "block", marginTop: "24px" }}
-          variant="contained"
-          onClick={onSubmitCandidates}
-        >
+        <Button variant="contained" onClick={onSubmitCandidates}>
           Submit
         </Button>
       </div>

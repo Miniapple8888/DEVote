@@ -16,7 +16,7 @@ const App = () => {
   const [account, setAccount] = useState();
   // make transactions and stuff using provider.request()
   return (
-    <>
+    <div className="w-full h-full flex items-center flex-col py-8 px-20 gap-4">
       <Brand />
       <Routes>
         <Route
@@ -66,7 +66,7 @@ const App = () => {
           }
         />
       </Routes>
-    </>
+    </div>
   );
 };
 

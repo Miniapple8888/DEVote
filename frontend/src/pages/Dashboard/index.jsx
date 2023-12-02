@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
-import im from './masterpiece.png';
+import masterpiece from './masterpiece.png';
 
 const Dashboard = () => {
   const [account, setAccount] = useState('');
@@ -31,7 +31,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-3 justify-center items-center">
+    <div className="w-full h-full flex flex-col gap-4 items-center">
       <p>Logged in as: {account}</p>
       <div className="flex justify-center items-center gap-5">
         <Button onClick={createElection}>Create/End Election</Button>
@@ -41,7 +41,9 @@ const Dashboard = () => {
         </Button>
         <Button onClick={viewResults}>View Election Results</Button>
       </div>
-      <img src={im} />
+      <div className="w-full h-[38rem]">
+        <img className="w-full h-full object-contain" src={masterpiece} alt="masterpiece" />
+      </div>
     </div>
   );
 };
