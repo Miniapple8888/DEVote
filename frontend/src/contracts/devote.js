@@ -29,7 +29,7 @@ export const getOngoingElectionID = async () => {
   return await smartContract.methods.getOngoingElectionID().call({
     from: accounts[0],
   });
-}
+};
 
 /**
  * This method connects to the smart contract to end an election
@@ -40,7 +40,7 @@ export const endElection = async () => {
   return await smartContract.methods.endElection().send({
     from: accounts[0],
   });
-}
+};
 
 /**
  * This method gets the list of elections a user has participated in
@@ -51,4 +51,15 @@ export const getElectionsForUser = async () => {
   return await smartContract.methods.getElectionsForUser().call({
     from: accounts[0],
   });
-}
+};
+
+/**
+ * @param id Id of the election  
+ * @returns (candidates, votes) A tuple with the arrays of the candidates and their results
+ */
+export const getElectionResults = async (id) => {
+  const accounts = await web3.eth.getAccounts();
+  return await smartContract.methods.getElectionResults(id).call({
+    from: accounts[0],
+  });
+};
