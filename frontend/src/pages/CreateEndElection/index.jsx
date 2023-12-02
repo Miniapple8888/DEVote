@@ -42,7 +42,6 @@ const CreateEndElection = () => {
             End Current Election
             </Button>
         </div>
-
       ) : (
         <CreateElection />
       )}
