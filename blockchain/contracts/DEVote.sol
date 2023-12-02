@@ -93,16 +93,16 @@ contract DEVote {
     function getElectionsForUser()
         public
         view
-        returns (uint256[] memory, bool[] memory)
+        returns (uint256[] memory electionIDs, bool[] memory electionStatuses)
     {
-        uint256[] memory electionIDs = addressElections[msg.sender];
+        uint256[] memory _electionIDs = addressElections[msg.sender];
         bool[] memory statuses = new bool[](
             addressElections[msg.sender].length
         );
-        for (uint256 i = 0; i < electionIDs.length; i++) {
-            statuses[i] = elections[electionIDs[i]].getElectionStatus();
+        for (uint256 i = 0; i < _electionIDs.length; i++) {
+            statuses[i] = elections[_electionIDs[i]].getElectionStatus();
         }
-        return (electionIDs, statuses);
+        return (_electionIDs, statuses);
     }
 
     /*
