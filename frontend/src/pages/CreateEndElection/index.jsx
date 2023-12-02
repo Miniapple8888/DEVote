@@ -35,7 +35,7 @@ const CreateEndElection = () => {
         <LoadingScreen />
       ) : electionID !== NO_ONGOING_ELECTION ? (
         <div className="flex flex-col gap-4 items-center">
-          <Header>You already have an on going election</Header>
+          <Header>You already have an ongoing election</Header>
           <h1>Election ID: {electionID.toString()}</h1>
           <Button variant="contained" color="warning" onClick={onEndElection}>
             End Current Election

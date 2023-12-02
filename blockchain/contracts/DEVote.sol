@@ -34,7 +34,7 @@ contract DEVote {
     modifier electionEnded(uint256 id) {
         require(
             elections[id].getElectionStatus() == true,
-            "Election is still on going"
+            "Election is still ongoing"
         );
         _;
     }

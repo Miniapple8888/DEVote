@@ -55,7 +55,7 @@ const ViewParticipatedElections = () => {
                             : "text-yellow-800 border-yellow-800 bg-yellow-100"
                         }`}
                       >
-                        {`${election.hasEnded ? "Ended" : "On going"}`}
+                        {`${election.hasEnded ? "Ended" : "Ongoing"}`}
                       </div>
                     </div>
                   </td>
@@ -79,7 +79,9 @@ const ViewParticipatedElections = () => {
           </table>
         ) : (
           <div className="w-full h-full flex justify-center items-center">
-            <h1 className="text-lg ">You haven't participated in any elections</h1>
+            <h1 className="text-lg ">
+              You haven't participated in any elections
+            </h1>
           </div>
         )}
       </div>
