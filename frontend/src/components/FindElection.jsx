@@ -5,8 +5,7 @@ import SearchForm from './SearchForm'
 
 const FindElection = ({ handleSearchForm, validateSearchQuery }) => {
     return (
-        <div>
-            <Header>Enter election ID</Header>
+        <div className='w-full h-full flex flex-col items-center gap-4'>
             <SearchForm handleSearchForm={handleSearchForm} validateSearchQuery={validateSearchQuery} />
         </div>
     )

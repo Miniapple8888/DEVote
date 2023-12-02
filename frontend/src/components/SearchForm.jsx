@@ -23,25 +23,28 @@ const SearchForm = ({ handleSearchForm, validateSearchQuery }) => {
     }
 
     return (
-        <form className="flex flex-col items-center" onSubmit={handleSubmit}>
-            <TextField
-                error={error}
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={(e) => {
-                    setSearchQuery(e.target.value)
-                    setError(false) // Reset error when typing
-                }}
-            />
-            <Button
-                type="submit"
-                className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 focus:outline-none"
-                onClick={() => {
-                    
-                }}
-            >
-                Search
-            </Button>
+        <form className="w-full flex flex-col items-center gap-3" onSubmit={handleSubmit}>
+            <div className='flex justify-center items-center gap-3'>
+                <TextField
+                    label="Enter election ID..."
+                    error={error}
+                    value={searchQuery}
+                    onChange={(e) => {
+                        setSearchQuery(e.target.value)
+                        setError(false) // Reset error when typing
+                    }}
+                    size='small'
+                />
+                <Button
+                    type="submit"
+                    className="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 focus:outline-none"
+                    onClick={() => {
+                        
+                    }}
+                >
+                    Search
+                </Button>
+            </div>
             {error && <p className="text-red-500">{errorMsg}</p>}
         </form>
     )
