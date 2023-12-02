@@ -102,6 +102,13 @@
 				"internalType": "bool",
 				"name": "hasEnded",
 				"type": "bool"
+		"inputs": [],
+		"name": "getOngoingElectionID",
+		"outputs": [
+			{
+				"internalType": "int",
+				"name": "",
+				"type": "int"
 			}
 		],
 		"stateMutability": "view",

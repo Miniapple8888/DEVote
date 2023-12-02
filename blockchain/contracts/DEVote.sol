@@ -34,7 +34,7 @@ contract DEVote {
     modifier electionEnded(uint256 id) {
         require(
             elections[id].getElectionStatus() == true,
-            "Election is still on going"
+            "Election is still ongoing"
         );
         _;
     }
@@ -55,22 +55,19 @@ contract DEVote {
     }
 
     /*
-     * This method verifies if a user has an on going election
-     * @return boolean True if it still on going and false if not
+     * This method returns the ID of the user's ongoing election
+     * @return int ID of ongoing election, -1 if no ongoing election
      */
-    function hasElectionGoing() public view returns (bool) {
+    function getOngoingElectionID() public view returns (int) {
         if (elections.length == 0) {
-            return false;
+            return -1;
         }
         Election target = elections[ongoingElections[msg.sender]];
-        address owner = target.getOwner();
-
-        if (owner != msg.sender) {
-            return false;
+        if (target.getOwner() != msg.sender || target.getElectionStatus()) {
+            return -1;
         }
-
-        bool hasEnded = target.getElectionStatus();
-        return !hasEnded;
+        // only works if we have < 10^77 elections
+        return int(ongoingElections[msg.sender]);
     }
 
     /*
