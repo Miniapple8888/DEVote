@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
-import masterpiece from "./masterpiece.png";
 import DashboardCard from "./DashboardCard";
 import ListCard from "./ListCard";
 import DashboardList from "./DashboardList";
 import CandidateCard from "./CandidateCard";
+import ElectionResultsCard from "./ElectionResultsCard";
+// import masterpiece from "./masterpiece.png";
 
 const Dashboard = () => {
   const [account, setAccount] = useState("");
@@ -49,50 +50,35 @@ const Dashboard = () => {
         <Button onClick={viewParticipatedElections}>
           View Participated Elections
         </Button>
-        <Button onClick={viewResults}>View Election Results</Button>
+        <Button onClick={viewResults}>Search Election Results</Button>
       </div>
       <div className="w-full h-full grid grid-cols-2 gap-4 p-4 grid-rows-2">
-        {/* All your created elections */}
-        <DashboardCard>
-          {!allUserElections ? (
-            <div className="w-full h-full flex flex-col items-center gap-4">
-              <h1 className="text-sm">Created Elections</h1>
-              <DashboardList>
-                <ListCard id={1} status={true} clickHandler={() => {}} />
-                <ListCard id={1} status={true} clickHandler={() => {}} />
-                <ListCard id={1} status={true} clickHandler={() => {}} />
-                <ListCard id={1} status={false} clickHandler={() => {}} />
-                <ListCard id={1} status={false} clickHandler={() => {}} />
-                <ListCard id={1} status={false} clickHandler={() => {}} />
-              </DashboardList>
-            </div>
-          ) : (
-            <h1 className="text-sm text-gray-700">
-              You haven't created any elections
-            </h1>
-          )}
-        </DashboardCard>
-
         {/* Your current election */}
         <DashboardCard>
           {!userElection ? (
-            <div className="w-full h-full flex flex-col items-center gap-4">
+            <div className="w-full h-full flex flex-col items-center gap-2">
               <h1 className="text-sm">Your Current Election Statistics</h1>
               <div className="w-full h-full flex justify-between gap-4">
-                <DashboardList>
-                  <CandidateCard candidateName={"Miguel"} numVotes={2}/>
-                  <CandidateCard candidateName={"Miguel"} numVotes={2}/>
-                  <CandidateCard candidateName={"Miguel"} numVotes={2}/>
-                  <CandidateCard candidateName={"Miguel"} numVotes={2}/>
-                  <CandidateCard candidateName={"Miguel"} numVotes={2}/>
-                  <CandidateCard candidateName={"Miguel"} numVotes={2}/>
+                <div className="w-full flex flex-col">
+                  <div className="w-full h-8 flex justify-between items-center p-3 border-b border-gray-400 bg-slate-50">
+                    <div className="w-1/2 flex justify-center items-center font-semibold">
+                      Candidate
+                    </div>
+                    <div className="w-1/2 flex justify-center items-center font-semibold">
+                      Votes
+                    </div>
+                  </div>
+                  <DashboardList>
+                    <CandidateCard candidateName={"Miguel"} numVotes={2} />
 
-
-                </DashboardList>
-                <div className="w-0 h-full border-r"></div>
+                  </DashboardList>
+                </div>
+                <div className="w-0 h-full border-r border-gray-300"></div>
                 <div className="w-full flex flex-col items-center justify-center gap-4">
                   <h1 className="font-bold">Current Winner: </h1>
-                  <p className=" font-bold border w-36 py-1 rounded-full flex items-center justify-center bg-blue-100 text-blue-500 border-blue-500">Miguel</p>
+                  <p className=" font-bold border w-36 py-1 rounded-full flex items-center justify-center bg-blue-100 text-blue-500 border-blue-500">
+                    Miguel
+                  </p>
                   <p>Votes: 2</p>
                 </div>
               </div>
@@ -104,11 +90,44 @@ const Dashboard = () => {
           )}
         </DashboardCard>
 
-        {/* PARTICIPATED ON GOING ELECTIONS */}
+        {/* PARTICIPATED ELECTION WINNERS */}
         <DashboardCard>
-          {userParticipatedElections ? (
+          {!userParticipatedElectionWinners ? (
+            <div className="w-full h-full flex flex-col items-center">
+              <h1 className="text-sm mb-2">
+                Winners of the elections you've participated
+              </h1>
+              <div className="w-full h-8 flex justify-between items-center p-3 border-b border-gray-400 bg-slate-50">
+                <div className="w-1/3 flex justify-center items-center font-semibold">
+                  Election ID
+                </div>
+                <div className="w-1/3 flex justify-center items-center font-semibold">
+                  Winner
+                </div>
+                <div className="w-1/3 flex justify-center items-center font-semibold">
+                  Votes
+                </div>
+              </div>
+              <DashboardList>
+                <ElectionResultsCard
+                  candidateName={"Miguel"}
+                  electionID={1}
+                  numVotes={75}
+                />                
+              </DashboardList>
+            </div>
+          ) : (
+            <h1 className="text-sm text-gray-700">
+              There are no final results for your participated elections
+            </h1>
+          )}
+        </DashboardCard>
+
+        {/* PARTICIPATED ON GOING ELECTIONS Participated On Going Elections*/}
+        <DashboardCard>
+          {!userParticipatedElections ? (
             <div className="w-full h-full flex flex-col items-center gap-2">
-              <h1 className="text-sm">Participated On Going Elections</h1>
+              <h1 className="text-sm"></h1>
               <div className="table"></div>
             </div>
           ) : (
@@ -118,19 +137,24 @@ const Dashboard = () => {
           )}
         </DashboardCard>
 
-        {/* PARTICIPATED ELECTION WINNERS */}
+        {/* All your created elections */}
         <DashboardCard>
-          {userParticipatedElectionWinners ? (
-            <div className="w-full h-full flex flex-col items-center gap-2">
-              <h1 className="text-sm">Results of participated elections</h1>
-              <div className="table"></div>
+          {!allUserElections ? (
+            <div className="w-full h-full flex flex-col items-center gap-4">
+              <h1 className="text-sm">Created Elections</h1>
+              <DashboardList>
+                <ListCard id={1} status={true} clickHandler={() => {}} />
+                <ListCard id={1} status={false} clickHandler={() => {}} />
+              </DashboardList>
             </div>
           ) : (
             <h1 className="text-sm text-gray-700">
-              There are no final results for your participated elections
+              You haven't created any elections
             </h1>
           )}
         </DashboardCard>
+
+        
       </div>
       {/* <div className="w-full h-[38rem]">
         <img className="w-full h-full object-contain" src={masterpiece} alt="masterpiece" />
