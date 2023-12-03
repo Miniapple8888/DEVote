@@ -33,7 +33,8 @@ contract DEVote {
      */
     modifier electionEnded(uint256 id) {
         require(
-            elections[id].getElectionStatus() == true,
+            elections[id].getOwner() == msg.sender ||
+                elections[id].getElectionStatus() == true,
             "Election is still ongoing"
         );
         _;
@@ -58,7 +59,7 @@ contract DEVote {
      * This method returns the ID of the user's ongoing election
      * @return int ID of ongoing election, -1 if no ongoing election
      */
-    function getOngoingElectionID() public view returns (int) {
+    function getOngoingElectionID() public view returns (int256) {
         if (elections.length == 0) {
             return -1;
         }
@@ -67,7 +68,7 @@ contract DEVote {
             return -1;
         }
         // only works if we have < 10^77 elections
-        return int(ongoingElections[msg.sender]);
+        return int256(ongoingElections[msg.sender]);
     }
 
     /*
@@ -155,7 +156,6 @@ contract DEVote {
             addressElections[msg.sender].push(id);
         }
         election.castVote(msg.sender, _vote);
-        
     }
 
     /*

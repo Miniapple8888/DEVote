@@ -7,15 +7,24 @@ import DashboardList from "./DashboardList";
 import TwoColCard from "./TwoColCard";
 import ElectionResultsCard from "./ElectionResultsCard";
 import StatusText from "../../components/StatusText";
+import {
+  getElectionResults,
+  getElectionsForUser,
+  getOngoingElectionID,
+} from "../../contracts/devote";
 // import masterpiece from "./masterpiece.png";
 
 const Dashboard = () => {
   const [account, setAccount] = useState("");
   const [userElection, setUserElection] = useState();
+  // @ts-ignore
   const [allUserElections, setAllUserElections] = useState();
   const [userParticipatedElections, setUserParticipatedElections] = useState();
+  // @ts-ignore
   const [userParticipatedElectionWinners, setUserParticipatedElectionWinners] =
     useState();
+  const [currentElectionWinner, setCurrentElectionWinner] = useState();
+  const [currentElectionID, setCurrentElectionID] = useState();
 
   const navigate = useNavigate();
   const createElection = () => {
@@ -39,7 +48,43 @@ const Dashboard = () => {
         (await window.ethereum.request({ method: "eth_accounts" }))[0]
       );
     }
-    getAccount();
+    async function getParticipatedElections() {
+      const response = await getElectionsForUser();
+      setUserParticipatedElections(response);
+    }
+
+    async function getUserOnGoingElection() {
+      const electionID = await getOngoingElectionID();
+      if (electionID != -1) {
+        const { candidateVotes, candidates } = await getElectionResults(
+          parseInt(electionID)
+        );
+        const electionResults = [];
+
+        candidates.map((candidate, index) => {
+          electionResults.push({
+            candidate: candidate,
+            numVotes: parseInt(candidateVotes[index]),
+          });
+        });
+
+        setCurrentElectionWinner(
+          electionResults.reduce((a, b) => (a.numVotes > b.numVotes ? a : b))
+        );
+        // @ts-ignore
+        setCurrentElectionID(parseInt(electionID));
+
+        // @ts-ignore
+        setUserElection(electionResults);
+      }
+    }
+    try {
+      getAccount();
+      getParticipatedElections();
+      getUserOnGoingElection();
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   return (
@@ -56,7 +101,7 @@ const Dashboard = () => {
       <div className="w-full h-full grid grid-cols-2 gap-4 p-4 grid-rows-2">
         {/* Your current election */}
         <DashboardCard>
-          {!userElection ? (
+          {userElection ? (
             <div className="w-full h-full flex flex-col items-center gap-2">
               <h1 className="text-sm">Your Current Election Statistics</h1>
               <div className="w-full h-full flex justify-between gap-4">
@@ -70,20 +115,36 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <DashboardList>
-                    <TwoColCard
-                      name={"Miguel"}
-                      value={`${2} votes`}
-                      isCandidate={true}
-                    />
+                    {userElection
+                      // @ts-ignore
+                      .map((candidateVotes) => (
+                        <TwoColCard
+                          name={candidateVotes.candidate}
+                          value={`${candidateVotes.numVotes} votes`}
+                          isCandidate={true}
+                        />
+                      ))}
                   </DashboardList>
                 </div>
                 <div className="w-0 h-full border-r border-gray-300"></div>
                 <div className="w-full flex flex-col items-center justify-center gap-4">
-                  <h1 className="font-bold">Current Winner: </h1>
-                  <p className=" font-bold border w-36 py-1 rounded-full flex items-center justify-center bg-blue-100 text-blue-500 border-blue-500">
-                    Miguel
+                  <p className="text-lg font-semibold">
+                    Election ID: {currentElectionID}
                   </p>
-                  <p>Votes: 2</p>
+                  <h1 className="font-semibold">Current Winner</h1>
+                  <p className=" font-bold text-2xl w-36 flex items-center justify-center text-blue-500">
+                    {
+                      // @ts-ignore
+                      currentElectionWinner.candidate
+                    }
+                  </p>
+                  <p>
+                    Votes:{" "}
+                    {
+                      // @ts-ignore
+                      currentElectionWinner.numVotes
+                    }
+                  </p>
                 </div>
               </div>
             </div>
@@ -96,7 +157,7 @@ const Dashboard = () => {
 
         {/* PARTICIPATED ELECTION WINNERS */}
         <DashboardCard>
-          {!userParticipatedElectionWinners ? (
+          {userParticipatedElectionWinners ? (
             <div className="w-full h-full flex flex-col items-center">
               <h1 className="text-sm mb-2">
                 Winners of the elections you've participated
@@ -129,7 +190,7 @@ const Dashboard = () => {
 
         {/* PARTICIPATED ON GOING ELECTIONS Participated On Going Elections*/}
         <DashboardCard>
-          {!userParticipatedElections ? (
+          {userParticipatedElections ? (
             <div className="w-full h-full flex flex-col items-center gap-2">
               <h1 className="text-sm">Participated Elections</h1>
               <div className="w-full h-full flex justify-between gap-4">
@@ -173,7 +234,7 @@ const Dashboard = () => {
 
         {/* All your created elections */}
         <DashboardCard>
-          {!allUserElections ? (
+          {allUserElections ? (
             <div className="w-full h-full flex flex-col items-center mb-2">
               <h1 className="text-sm">Created Elections</h1>
               <div className="w-full h-8 flex justify-between items-center p-3 border-b border-gray-400 bg-slate-50">

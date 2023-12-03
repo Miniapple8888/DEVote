@@ -67,12 +67,12 @@
 				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "",
+						"name": "_timestamp",
 						"type": "uint256"
 					},
 					{
 						"internalType": "string[]",
-						"name": "",
+						"name": "_candidates",
 						"type": "string[]"
 					}
 				],
@@ -191,19 +191,19 @@
 	},
 	"sources": {
 		"blockchain/contracts/DEVote.sol": {
-			"keccak256": "0x25a833684282885180afe4c450ad63acf6f407cb323931ffcde418036a224862",
+			"keccak256": "0xb67bbcbd82cbd01cb5fa0e7a295a6db437fd6f862ed7520a50ffbe592073c4d1",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://93e345ebf6c4316ff03e81032c680a1f3ced2cf3f9f4d1886e15e91e3ee583cf",
-				"dweb:/ipfs/QmNkdCTR8U3XYQDTtXKiUmvTzDJHU7RBBgBm2ZuEi81fui"
+				"bzz-raw://61e4fe36ff661470bf5fd425ea03896213fe70dbbcb623503005e5c697227508",
+				"dweb:/ipfs/QmSNC44E9e4f1cdbdJfer5Wfv5N4RpSZD4mebmioQK3Jfe"
 			]
 		},
 		"blockchain/contracts/Election.sol": {
-			"keccak256": "0x4ef3fbe92352c62073c029a0cd2a597b05435a0c84d8af6b7b7effaf91717bd0",
+			"keccak256": "0xf182508d5d712f208b41d7198e33411c6d46f925a37ac20deee82805caa3665a",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://e40c386b21d467c77f8122b3580355ac7cde1a256cc23011c6067e432f4b4f43",
-				"dweb:/ipfs/QmNz115Tubr6a4Ti7TnrLfgS2HCc6BRwXhz8A2PYhDXEue"
+				"bzz-raw://2cad4d4ef348df5e9abbfc607c4902cf6711b4669dc16679fb144becf77fbbee",
+				"dweb:/ipfs/QmR6B8ENZLRCAkJGrLrVU7z1DCQ7VPjbHwPGoXwZFx6Whq"
 			]
 		}
 	},
