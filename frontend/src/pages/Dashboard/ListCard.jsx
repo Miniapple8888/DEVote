@@ -9,7 +9,7 @@ const ListCard = ({ id, status, clickHandler }) => {
       <div className="w-1/2 flex justify-center items-center">{id}</div>
       <div className="w-1/2 flex justify-center items-center relative">
         <StatusText status={status} />
-        <IconButton clickHandler={clickHandler} isAbsolute={true} leftValue="left-64">
+        <IconButton clickHandler={clickHandler} isAbsolute={true}>
           <GoChevronRight />
         </IconButton>
       </div>

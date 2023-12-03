@@ -11,9 +11,10 @@ const TwoColCard = ({ name, value, isCandidate, clickHandler = () => {} }) => {
       ) : (
         <div className="w-1/2 flex justify-center items-center relative">
           <div className="flex justify-center items-center">{value}</div>
-          <IconButton clickHandler={clickHandler} isAbsolute={true}>
+          
+          {value === true && <IconButton clickHandler={clickHandler} isAbsolute={true}>
             <GoChevronRight />
-          </IconButton>
+          </IconButton>}
         </div>
       )}
     </div>

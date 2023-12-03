@@ -49,8 +49,22 @@ const Dashboard = () => {
       );
     }
     async function getParticipatedElections() {
-      const response = await getElectionsForUser();
-      setUserParticipatedElections(response);
+      const { electionIDs, electionStatuses } = await getElectionsForUser();
+      const participatedElections = [];
+
+      electionIDs.map((election, index) => {
+        if (!electionStatuses[index]) {
+          participatedElections.push({
+            id: parseInt(election),
+            status: electionStatuses[index],
+          });
+        }
+      });
+
+      if (participatedElections.length > 0) {
+        // @ts-ignore
+        setUserParticipatedElections(participatedElections);
+      }
     }
 
     async function getUserOnGoingElection() {
@@ -78,6 +92,12 @@ const Dashboard = () => {
         setUserElection(electionResults);
       }
     }
+
+    async function getParticipatedElectionResults() {
+      const { electionIDs } = await getElectionsForUser();
+
+    }
+
     try {
       getAccount();
       getParticipatedElections();
@@ -192,42 +212,36 @@ const Dashboard = () => {
         <DashboardCard>
           {userParticipatedElections ? (
             <div className="w-full h-full flex flex-col items-center gap-2">
-              <h1 className="text-sm">Participated Elections</h1>
-              <div className="w-full h-full flex justify-between gap-4">
-                <div className="w-full flex flex-col">
-                  <div className="w-full h-8 flex justify-between items-center p-3 border-b border-gray-400 bg-slate-50">
-                    <div className="w-1/2 flex justify-center items-center font-semibold">
-                      Election ID
-                    </div>
-                    <div className="w-1/2 flex justify-center items-center font-semibold">
-                      Status
-                    </div>
+              <h1 className="text-sm">Participated On going Elections</h1>
+              <div className="w-full flex flex-col">
+                <div className="w-full h-8 flex justify-between items-center p-3 border-b border-gray-400 bg-slate-50">
+                  <div className="w-1/2 flex justify-center items-center font-semibold">
+                    Election ID
                   </div>
-                  <DashboardList>
-                    <TwoColCard
-                      name={1}
-                      value={<StatusText status={true} />}
-                      isCandidate={false}
-                      clickHandler={() => {}}
-                    />
-                    <TwoColCard
-                      name={1}
-                      value={<StatusText status={true} />}
-                      isCandidate={false}
-                      clickHandler={() => {}}
-                    />
-                  </DashboardList>
+                  <div className="w-1/2 flex justify-center items-center font-semibold">
+                    Status
+                  </div>
                 </div>
-                <div className="w-0 h-full border-r border-gray-300"></div>
-                <div className="w-1/3 flex flex-col items-center justify-center gap-4">
-                  <h1 className="text-lg text-center">On Going Elections</h1>
-                  <p className="text-center text-4xl font-semibold">2</p>
-                </div>
+                <DashboardList>
+                  {
+                    // @ts-ignore
+                    userParticipatedElections.map((election) => (
+                      <TwoColCard
+                        name={election.id}
+                        value={<StatusText status={election.status} />}
+                        isCandidate={false}
+                        clickHandler={() => {
+                          navigate(`/viewResults?electionID=${election.id}`);
+                        }}
+                      />
+                    ))
+                  }
+                </DashboardList>
               </div>
             </div>
           ) : (
             <h1 className="text-sm text-gray-700">
-              You haven't participated in any election
+              There are no on going participated elections
             </h1>
           )}
         </DashboardCard>
@@ -246,7 +260,12 @@ const Dashboard = () => {
                 </div>
               </div>
               <DashboardList>
-                <ListCard id={1} status={true} clickHandler={() => {}} />
+                {/* {
+                  // @ts-ignore
+                  userParticipatedElections.map((election) => (
+                    <ListCard id={election.id} status={election.status} clickHandler={() => {}} />
+                  ))
+                } */}
               </DashboardList>
             </div>
           ) : (
