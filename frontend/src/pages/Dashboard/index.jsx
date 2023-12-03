@@ -174,11 +174,18 @@ const Dashboard = () => {
         {/* All your created elections */}
         <DashboardCard>
           {!allUserElections ? (
-            <div className="w-full h-full flex flex-col items-center gap-2">
+            <div className="w-full h-full flex flex-col items-center mb-2">
               <h1 className="text-sm">Created Elections</h1>
+              <div className="w-full h-8 flex justify-between items-center p-3 border-b border-gray-400 bg-slate-50">
+                <div className="w-1/2 flex justify-center items-center font-semibold">
+                  Election ID
+                </div>
+                <div className="w-1/2 flex justify-center items-center font-semibold">
+                  Status
+                </div>
+              </div>
               <DashboardList>
                 <ListCard id={1} status={true} clickHandler={() => {}} />
-                <ListCard id={1} status={false} clickHandler={() => {}} />
               </DashboardList>
             </div>
           ) : (

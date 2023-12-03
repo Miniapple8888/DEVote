@@ -1,5 +1,6 @@
 import React from "react";
 import { GoChevronRight } from "react-icons/go";
+import IconButton from "./IconButton";
 
 const TwoColCard = ({ name, value, isCandidate, clickHandler = () => {} }) => {
   return (
@@ -10,14 +11,9 @@ const TwoColCard = ({ name, value, isCandidate, clickHandler = () => {} }) => {
       ) : (
         <div className="w-1/2 flex justify-center items-center relative">
           <div className="flex justify-center items-center">{value}</div>
-          <button
-            className="w-6 h-6 absolute left-44 flex justify-center items-center rounded-full border shadow-md hover:bg-gray-200 active:bg-gray-300 transition-all"
-            onClick={() => {
-              clickHandler;
-            }}
-          >
+          <IconButton clickHandler={clickHandler} isAbsolute={true}>
             <GoChevronRight />
-          </button>
+          </IconButton>
         </div>
       )}
     </div>
