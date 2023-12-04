@@ -13,7 +13,7 @@ import ViewParticipatedElections from "./pages/ViewParticipatedElections";
 const App = () => {
   // make transactions and stuff using provider.request()
   return (
-    <div className="w-full h-full flex items-center flex-col py-8 px-20 gap-4">
+    <div className="w-full h-full flex items-center flex-col py-4 px-20 gap-4">
       <Brand />
       <Routes>
         <Route
