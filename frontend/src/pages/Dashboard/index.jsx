@@ -17,7 +17,10 @@ const Dashboard = () => {
   const [account, setAccount] = useState("");
   const [userElection, setUserElection] = useState();
   // @ts-ignore
-  const [userParticipatedElections, setUserParticipatedElections] = useState();
+  const [userParticipatedElections, setUserParticipatedElections] = useState({
+    ended: 0,
+    onGoing: 0
+  });
   // @ts-ignore
   const [userParticipatedElectionWinners, setUserParticipatedElectionWinners] =
     useState();
@@ -88,8 +91,6 @@ const Dashboard = () => {
         ended: endedElections,
         onGoing: onGoingElections,
       };
-
-      console.log(electionsStatusCount);
 
       // @ts-ignore
       setUserParticipatedElections(electionsStatusCount);
