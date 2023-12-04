@@ -199,7 +199,7 @@ const Dashboard = () => {
             </div>
           ) : (
             <h1 className="text-sm text-gray-700">
-              You don't have an on going election
+              You don't have any ongoing election
             </h1>
           )}
         </DashboardCard>
@@ -216,7 +216,7 @@ const Dashboard = () => {
                   // @ts-ignore
                   userParticipatedElections.onGoing
                 }
-                title={"On Going"}
+                title={"Ongoing"}
               />
               <div className="w-0 h-full border-r border-gray-300"></div>
               <DashboardStatisticsCard
