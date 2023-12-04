@@ -13,6 +13,7 @@ import {
   getOngoingElectionID,
 } from "../../contracts/devote";
 import FourColCard from "./FourColCard";
+import DashboardStatisticsCard from "./DashboardStatisticsCard";
 // import masterpiece from "./masterpiece.png";
 
 const Dashboard = () => {
@@ -75,6 +76,28 @@ const Dashboard = () => {
       }
     }
 
+    async function getParticipatedElections() {
+      const { electionStatuses } = await getElectionsForUser();
+      let onGoingElections = 0;
+      let endedElections = 0;
+      electionStatuses.map((status) => {
+        if (status) {
+          endedElections += 1;
+        } else {
+          onGoingElections += 1;
+        }
+      });
+      const electionsStatusCount = {
+        ended: endedElections,
+        onGoing: onGoingElections,
+      };
+
+      console.log(electionsStatusCount);
+
+      // @ts-ignore
+      setUserParticipatedElections(electionsStatusCount);
+    }
+
     async function getParticipatedElectionResults() {
       const { electionIDs } = await getElectionsForUser();
       const elections = [];
@@ -109,6 +132,7 @@ const Dashboard = () => {
       getAccount();
       getUserOnGoingElection();
       getParticipatedElectionResults();
+      getParticipatedElections();
     } catch (err) {
       console.log(err);
     }
@@ -182,37 +206,38 @@ const Dashboard = () => {
           )}
         </DashboardCard>
 
-        {/* PARTICIPATED ELECTION WINNERS */}
+        {/* PARTICIPATED ELECTIONS STATISTICS */}
         <DashboardCard>
-          {userParticipatedElectionWinners ? (
-            <div className="w-full h-full flex flex-col items-center">
-              <h1 className="text-sm mb-2">
-                Statistics of participated elections
-              </h1>
-              <div className="w-full h-8 flex justify-between items-center p-3 border-b border-gray-400 bg-slate-50">
-                <div className="w-1/3 flex justify-center items-center font-semibold">
-                  Election ID
-                </div>
-                <div className="w-1/3 flex justify-center items-center font-semibold">
-                  Winner
-                </div>
-                <div className="w-1/3 flex justify-center items-center font-semibold">
-                  Votes
-                </div>
-              </div>
-              <DashboardList>
-                <ElectionResultsCard
-                  candidateName={"Miguel"}
-                  electionID={1}
-                  numVotes={75}
-                />
-              </DashboardList>
-            </div>
-          ) : (
-            <h1 className="text-sm text-gray-700">
-              There are no final results for your participated elections
+          <div className="w-full h-full flex flex-col items-center">
+            <h1 className="text-sm mb-2">
+              Statistics of participated elections
             </h1>
-          )}
+            <div className="w-full h-full flex gap-3 items-center justify-between">
+              <DashboardStatisticsCard
+                counter={
+                  // @ts-ignore
+                  userParticipatedElections.onGoing
+                }
+                title={"On Going"}
+              />
+              <div className="w-0 h-full border-r border-gray-300"></div>
+              <DashboardStatisticsCard
+                counter={
+                  // @ts-ignore
+                  userParticipatedElections.ended
+                }
+                title={"Ended"}
+              />
+              <div className="w-0 h-full border-r border-gray-300"></div>
+              <DashboardStatisticsCard
+                counter={
+                  // @ts-ignore
+                  userParticipatedElections.onGoing + userParticipatedElections.ended
+                }
+                title={"Total"}
+              />
+            </div>
+          </div>
         </DashboardCard>
 
         {/* PARTICIPATED ENDED ELECTIONS */}
@@ -242,7 +267,9 @@ const Dashboard = () => {
                       <FourColCard
                         candidate={election.candidate}
                         clickHandler={() => {
-                          navigate(`/viewResults?electionID=${election.electionID}`)
+                          navigate(
+                            `/viewResults?electionID=${election.electionID}`
+                          );
                         }}
                         name={election.electionID}
                         status={election.hasEnded}
