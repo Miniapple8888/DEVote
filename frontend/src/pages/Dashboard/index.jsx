@@ -122,8 +122,11 @@ const Dashboard = () => {
         };
         winners.push(winner);
       });
-      // @ts-ignore
-      setUserParticipatedElectionWinners(winners);
+
+      await setTimeout(() => {
+        // @ts-ignore
+        setUserParticipatedElectionWinners(winners);
+      }, 1000)
     }
 
     try {
