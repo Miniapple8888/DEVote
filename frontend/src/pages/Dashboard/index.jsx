@@ -263,6 +263,7 @@ const Dashboard = () => {
                     // @ts-ignore
                     userParticipatedElectionWinners.map((election) => (
                       <FourColCard
+                      key={election.electionID}
                         candidate={election.candidate}
                         clickHandler={() => {
                           navigate(
