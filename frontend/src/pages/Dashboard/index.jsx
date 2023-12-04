@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DashboardCard from "./DashboardCard";
-import ListCard from "./ListCard";
 import DashboardList from "./DashboardList";
 import TwoColCard from "./TwoColCard";
-import ElectionResultsCard from "./ElectionResultsCard";
-import StatusText from "../../components/StatusText";
 import {
   getElectionResults,
   getElectionsForUser,
