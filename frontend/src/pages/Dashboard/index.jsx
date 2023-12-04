@@ -123,10 +123,10 @@ const Dashboard = () => {
         winners.push(winner);
       });
 
-      await setTimeout(() => {
+      setTimeout(() => {
         // @ts-ignore
         setUserParticipatedElectionWinners(winners);
-      }, 1000)
+      }, 1500)
     }
 
     try {
