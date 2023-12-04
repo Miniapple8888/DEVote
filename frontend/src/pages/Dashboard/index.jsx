@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
-import { useNavigate } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import DashboardCard from "./DashboardCard";
 import ListCard from "./ListCard";
 import DashboardList from "./DashboardList";
@@ -12,13 +12,13 @@ import {
   getElectionsForUser,
   getOngoingElectionID,
 } from "../../contracts/devote";
+import FourColCard from "./FourColCard";
 // import masterpiece from "./masterpiece.png";
 
 const Dashboard = () => {
   const [account, setAccount] = useState("");
   const [userElection, setUserElection] = useState();
   // @ts-ignore
-  const [allUserElections, setAllUserElections] = useState();
   const [userParticipatedElections, setUserParticipatedElections] = useState();
   // @ts-ignore
   const [userParticipatedElectionWinners, setUserParticipatedElectionWinners] =
@@ -47,24 +47,6 @@ const Dashboard = () => {
       setAccount(
         (await window.ethereum.request({ method: "eth_accounts" }))[0]
       );
-    }
-    async function getParticipatedElections() {
-      const { electionIDs, electionStatuses } = await getElectionsForUser();
-      const participatedElections = [];
-
-      electionIDs.map((election, index) => {
-        if (!electionStatuses[index]) {
-          participatedElections.push({
-            id: parseInt(election),
-            status: electionStatuses[index],
-          });
-        }
-      });
-
-      if (participatedElections.length > 0) {
-        // @ts-ignore
-        setUserParticipatedElections(participatedElections);
-      }
     }
 
     async function getUserOnGoingElection() {
@@ -95,13 +77,38 @@ const Dashboard = () => {
 
     async function getParticipatedElectionResults() {
       const { electionIDs } = await getElectionsForUser();
+      const elections = [];
+      const winners = [];
+      await Promise.all(
+        electionIDs.map(async (election) => {
+          elections.push(await getElectionResults(parseInt(election)));
+        })
+      );
 
+      elections.map((election, index) => {
+        const winnerVotes = election.candidateVotes.reduce((a, b) =>
+          parseInt(a) >= parseInt(b) ? a : b
+        );
+
+        const candidate =
+          election.candidates[election.candidateVotes.indexOf(winnerVotes)];
+
+        const winner = {
+          electionID: parseInt(electionIDs[index]),
+          candidate: candidate,
+          votes: parseInt(winnerVotes),
+          hasEnded: election.hasEnded,
+        };
+        winners.push(winner);
+      });
+      // @ts-ignore
+      setUserParticipatedElectionWinners(winners);
     }
 
     try {
       getAccount();
-      getParticipatedElections();
       getUserOnGoingElection();
+      getParticipatedElectionResults();
     } catch (err) {
       console.log(err);
     }
@@ -180,7 +187,7 @@ const Dashboard = () => {
           {userParticipatedElectionWinners ? (
             <div className="w-full h-full flex flex-col items-center">
               <h1 className="text-sm mb-2">
-                Winners of the elections you've participated
+                Statistics of participated elections
               </h1>
               <div className="w-full h-8 flex justify-between items-center p-3 border-b border-gray-400 bg-slate-50">
                 <div className="w-1/3 flex justify-center items-center font-semibold">
@@ -208,31 +215,38 @@ const Dashboard = () => {
           )}
         </DashboardCard>
 
-        {/* PARTICIPATED ON GOING ELECTIONS Participated On Going Elections*/}
-        <DashboardCard>
-          {userParticipatedElections ? (
+        {/* PARTICIPATED ENDED ELECTIONS */}
+        <DashboardCard span={true}>
+          {userParticipatedElectionWinners ? (
             <div className="w-full h-full flex flex-col items-center gap-2">
-              <h1 className="text-sm">Participated On going Elections</h1>
+              <h1 className="text-sm">Winner of your participated elections</h1>
               <div className="w-full flex flex-col">
                 <div className="w-full h-8 flex justify-between items-center p-3 border-b border-gray-400 bg-slate-50">
-                  <div className="w-1/2 flex justify-center items-center font-semibold">
+                  <div className="w-1/4 flex justify-center items-center font-semibold">
                     Election ID
                   </div>
-                  <div className="w-1/2 flex justify-center items-center font-semibold">
+                  <div className="w-1/4 flex justify-center items-center font-semibold">
+                    Winner
+                  </div>
+                  <div className="w-1/4 flex justify-center items-center font-semibold">
+                    Votes
+                  </div>
+                  <div className="w-1/4 flex justify-center items-center font-semibold">
                     Status
                   </div>
                 </div>
                 <DashboardList>
                   {
                     // @ts-ignore
-                    userParticipatedElections.map((election) => (
-                      <TwoColCard
-                        name={election.id}
-                        value={<StatusText status={election.status} />}
-                        isCandidate={false}
+                    userParticipatedElectionWinners.map((election) => (
+                      <FourColCard
+                        candidate={election.candidate}
                         clickHandler={() => {
-                          navigate(`/viewResults?electionID=${election.id}`);
+                          navigate(`/viewResults?electionID=${election.electionID}`)
                         }}
+                        name={election.electionID}
+                        status={election.hasEnded}
+                        votes={election.votes}
                       />
                     ))
                   }
@@ -241,36 +255,7 @@ const Dashboard = () => {
             </div>
           ) : (
             <h1 className="text-sm text-gray-700">
-              There are no on going participated elections
-            </h1>
-          )}
-        </DashboardCard>
-
-        {/* All your created elections */}
-        <DashboardCard>
-          {allUserElections ? (
-            <div className="w-full h-full flex flex-col items-center mb-2">
-              <h1 className="text-sm">Created Elections</h1>
-              <div className="w-full h-8 flex justify-between items-center p-3 border-b border-gray-400 bg-slate-50">
-                <div className="w-1/2 flex justify-center items-center font-semibold">
-                  Election ID
-                </div>
-                <div className="w-1/2 flex justify-center items-center font-semibold">
-                  Status
-                </div>
-              </div>
-              <DashboardList>
-                {/* {
-                  // @ts-ignore
-                  userParticipatedElections.map((election) => (
-                    <ListCard id={election.id} status={election.status} clickHandler={() => {}} />
-                  ))
-                } */}
-              </DashboardList>
-            </div>
-          ) : (
-            <h1 className="text-sm text-gray-700">
-              You haven't created any elections
+              There are no ended elections that you have participated in
             </h1>
           )}
         </DashboardCard>
