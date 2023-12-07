@@ -191,11 +191,11 @@
 	},
 	"sources": {
 		"blockchain/contracts/DEVote.sol": {
-			"keccak256": "0xb67bbcbd82cbd01cb5fa0e7a295a6db437fd6f862ed7520a50ffbe592073c4d1",
+			"keccak256": "0x458ae584fadbe1c2b69019215481b1d7d50db3e005bdb73e8cd781c7f21e6430",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://61e4fe36ff661470bf5fd425ea03896213fe70dbbcb623503005e5c697227508",
-				"dweb:/ipfs/QmSNC44E9e4f1cdbdJfer5Wfv5N4RpSZD4mebmioQK3Jfe"
+				"bzz-raw://0a8bbf06ffb9ace8724bbc173b9d5ab9e0114156667bcd4c2296fc07afca0462",
+				"dweb:/ipfs/QmbsEB51iKUPN18JwaSAKKNTFwuqUewPYbxdAkyJHvgSqq"
 			]
 		},
 		"blockchain/contracts/Election.sol": {

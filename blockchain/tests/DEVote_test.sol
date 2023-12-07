@@ -8,7 +8,6 @@ import "remix_tests.sol";
 // This import is required to use custom transaction context
 // Although it may fail compilation in 'Solidity Compiler' plugin
 // But it will work fine in 'Solidity Unit Testing' plugin
-import "remix_accounts.sol";
 import "../contracts/DEVote.sol";
 
 contract testSuite {
@@ -42,7 +41,7 @@ contract testSuite {
     function checkElectionResults() public {
         devote.castVoteOnElection(0, "mike");
         devote.endElection();
-        (, uint256[] memory numVotes) = devote.getElectionResults(0);
+        (, , uint256[] memory numVotes, ) = devote.getElectionResults(0);
         Assert.ok(numVotes[0] == 1, "mike wins");
         Assert.ok(numVotes[1] == 0, "mike wins");
         Assert.ok(numVotes[2] == 0, "mike wins");

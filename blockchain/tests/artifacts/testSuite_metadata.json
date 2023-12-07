@@ -1,0 +1,105 @@
+{
+	"compiler": {
+		"version": "0.8.22+commit.4fc1097e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "beforeEach",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "checkCreateElection",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "checkElectionResults",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "checkGetElectionsForUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "checkGetOngoingElectionID",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"blockchain/tests/DEVote_test.sol": "testSuite"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"blockchain/contracts/DEVote.sol": {
+			"keccak256": "0x458ae584fadbe1c2b69019215481b1d7d50db3e005bdb73e8cd781c7f21e6430",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://0a8bbf06ffb9ace8724bbc173b9d5ab9e0114156667bcd4c2296fc07afca0462",
+				"dweb:/ipfs/QmbsEB51iKUPN18JwaSAKKNTFwuqUewPYbxdAkyJHvgSqq"
+			]
+		},
+		"blockchain/contracts/Election.sol": {
+			"keccak256": "0xf182508d5d712f208b41d7198e33411c6d46f925a37ac20deee82805caa3665a",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://2cad4d4ef348df5e9abbfc607c4902cf6711b4669dc16679fb144becf77fbbee",
+				"dweb:/ipfs/QmR6B8ENZLRCAkJGrLrVU7z1DCQ7VPjbHwPGoXwZFx6Whq"
+			]
+		},
+		"blockchain/tests/DEVote_test.sol": {
+			"keccak256": "0xb1f8c968a1bb6b53b8d0c76cd56a358a0b37ef82ad3a2191bd92ac552268dc65",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://c1cca73197b5884eaf403fdd94e2970f6773b1671198091ab75b101ff90d7d96",
+				"dweb:/ipfs/QmWCV8XPpSudaEpjtMggtuF9wbiaPyi6XXV7VHaNMn25Ls"
+			]
+		},
+		"remix_tests.sol": {
+			"keccak256": "0xe2783cdc204cba8c72494119339f1d90f9022b15d6c718c668b7f097d8e29787",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://bb6a22e64c7f16bcaab63b1c1a1b269d5be8a6d37bdd9dec1718477ab916b18e",
+				"dweb:/ipfs/QmdkW1tT5iadBvaHMCoskhDGZKnfdg8o1D9CcoQYtdJet7"
+			]
+		}
+	},
+	"version": 1
+}
